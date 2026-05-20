@@ -9,7 +9,7 @@
 - Проекты
 - Финансы
 - Календарь
-- Отчеты и комментарии
+- Отчеты
 - Документы и шаблоны
 - Архив
 
@@ -20,7 +20,7 @@
 - `03-projects/projects.md`
 - `04-finances/finances.md`
 - `05-calendar/calendar.md`
-- `06-reports-comments/reports-comments.md`
+- `06-reports/reports.md`
 - `07-docs-templates/docs-templates.md`
 - `08-archive/archive.md`
 

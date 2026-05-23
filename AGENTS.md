@@ -77,7 +77,6 @@
 
 ## Структура проекта
 
-- `.agents/skills/pilot-spec-workflow/SKILL.md` - инструкция по работе со спецификациями.
 - `Specs/01-global-spec-md/global-spec.md` - общий контекст.
 - `Specs/02-functional-map-md/functional-map.md` - описание функций.
 - `Specs/03-future-spec-md/future-spec.md` - следующий этап после функциональной карты.
@@ -85,4 +84,3 @@
 - `Specs/05-user-stories/user-stories.md` - пользовательские истории.
 - `06-work-plans/active/work-plans.md` - активные планы работ.
 - `06-work-plans/inactive/template-plan.md` - шаблон для отложенных планов.
-

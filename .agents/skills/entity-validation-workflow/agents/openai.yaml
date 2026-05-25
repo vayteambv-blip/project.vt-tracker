@@ -1,0 +1,4 @@
+interface:
+  display_name: "Entity Validation Workflow"
+  short_description: "Checks required fields and prevents incomplete saves"
+  default_prompt: "Use this skill to validate client, firm, project, document, facture, and report data before saving, and to prevent incomplete or mixed entities."

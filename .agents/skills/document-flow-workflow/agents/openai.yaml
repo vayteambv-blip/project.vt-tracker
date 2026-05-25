@@ -1,0 +1,4 @@
+interface:
+  display_name: "Document Flow Workflow"
+  short_description: "Manages documents, versions, templates, and file actions"
+  default_prompt: "Use this skill to manage project and firm documents, shared facture sync, file versions, templates, open/download actions, and email sending without losing history."

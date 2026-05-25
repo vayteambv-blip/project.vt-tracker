@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Creation Workflow"
+  short_description: "Guides safe project creation from client to estimate"
+  default_prompt: "Use this skill to create projects in the correct order, verify client, address, direction, approved estimate, and initial project data, and keep the creation flow clean."

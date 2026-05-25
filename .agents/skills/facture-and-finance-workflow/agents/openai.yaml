@@ -1,0 +1,4 @@
+interface:
+  display_name: "Facture and Finance Workflow"
+  short_description: "Handles factures, expenses, payments, and profit"
+  default_prompt: "Use this skill to manage factures, project expenses, firm payments, additional work lines, balances, and profit calculations without mixing finance rules."

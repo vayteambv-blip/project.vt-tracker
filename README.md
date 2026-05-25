@@ -1,6 +1,6 @@
 # Проект VT Tracker
 
-Репозиторий для работы с Codex и проектной документацией.
+Репозиторий для работы с Codex, проектной документацией и фронтендом на Next.js + TypeScript.
 
 ## Структура
 
@@ -11,6 +11,18 @@
 - `Specs/04-technical-specs/technical-spec.md` - техническая спецификация.
 - `Specs/05-user-stories/user-stories.md` - пользовательские истории.
 - `Specs/06-work-plans/work-plans.md` - рабочие планы.
+
+## Фронтенд
+
+- `src/app` - маршруты и страницы Next.js.
+- `src/components` - переиспользуемые UI-блоки.
+- `src/lib` - общие данные и конфигурация интерфейса.
+
+## Запуск
+
+1. `npm install`
+2. `npm run dev`
+3. Открыть `http://localhost:3000`
 
 ## Основные skills
 

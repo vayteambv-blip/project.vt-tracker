@@ -22,7 +22,8 @@ Use this skill when a change affects spec layout, stage order, or file placement
 - Keep execution planning in `Work Plans` only.
 - If one rule affects multiple stages, update every related spec together.
 - If a file looks like it belongs to the wrong stage, move or rewrite it before continuing.
-- Do not add extra folders or duplicate the same meaning in multiple stages without a clear reason.
+- Do not add extra folders or repeat the same rule in multiple stages without a clear reason.
+- If a rule is already fixed in one stage, keep the other stages to a short reference or a small уточнение, not a full duplicate with the same meaning.
 
 ## Workflow
 

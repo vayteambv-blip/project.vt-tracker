@@ -1,0 +1,4 @@
+interface:
+  display_name: "Archive Return Workflow"
+  short_description: "Restores archived projects as the same active project"
+  default_prompt: "Use this skill when returning a project from archive. Restore the same project with its existing data, set a new start date, and continue with the normal active-project flow without creating a duplicate."

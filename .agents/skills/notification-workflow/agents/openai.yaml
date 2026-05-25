@@ -1,0 +1,4 @@
+interface:
+  display_name: "Notification Workflow"
+  short_description: "Creates practical reminders and deadline alerts"
+  default_prompt: "Use this skill to manage practical reminders, deadline alerts, and completion warnings without duplicating calendar behavior."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Firm Management Workflow"
+  short_description: "Manages firms, contracts, workers, and project links"
+  default_prompt: "Use this skill to manage firms, firm contracts, workers, project links, and firm history without mixing firms with clients or project-only data."

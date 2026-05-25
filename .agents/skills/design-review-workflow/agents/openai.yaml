@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Review Workflow"
+  short_description: "Review design options and mark what to keep."
+  default_prompt: "Use this skill to review design options, compare variants, and decide what should stay, what should change, and what should be dropped before approval."

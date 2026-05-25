@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Map Workflow"
+  short_description: "Manage the Design Map as a safe visual experimentation area."
+  default_prompt: "Use this skill to manage the Design Map as a separate place for visual experiments, comparisons, and draft ideas before anything is approved for the main project."

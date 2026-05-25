@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Approval Workflow"
+  short_description: "Track what is approved before it reaches the main project."
+  default_prompt: "Use this skill to track approvals for design ideas, ensuring nothing moves into the main project until the user has clearly approved it."

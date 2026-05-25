@@ -1,4 +1,4 @@
 interface:
-  display_name: "Spec Structure Workflow"
-  short_description: "Keeps spec folders ordered and separated"
-  default_prompt: "Use this skill to maintain the project spec hierarchy, keep Functional, Future, Technical, User Stories, and Work Plans separated, and prevent structural drift."
+  display_name: "Структура спека"
+  short_description: "Поддерживает порядок стадий и чистую структуру документации"
+  default_prompt: "Используй этот skill, чтобы держать дерево спека в порядке, размещать содержание в правильной стадии и избегать дублей правил между файлами спека."

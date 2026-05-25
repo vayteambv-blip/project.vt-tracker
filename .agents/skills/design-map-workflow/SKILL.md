@@ -1,26 +1,24 @@
 ---
 name: design-map-workflow
-description: Manage the Design Map as a separate visual workspace for experiments, comparisons, and draft design ideas before approval. Use when the user wants to test UI options, compare variants, remove unused ideas, or prepare design decisions without changing the main project.
+description: Работа с картой дизайна как с отдельным местом для черновиков, вариантов и сравнения идей перед переносом в основной проект.
 ---
 
-# Design Map Workflow
+# Карта дизайна
 
-## Overview
+## Назначение
 
-Use this skill to keep design experiments separate from the main project.
+Использовать, когда нужно собирать идеи, сравнивать варианты и держать черновики отдельно от основного проекта.
 
-## Rules
+## Правила
 
-- Keep `Design Map` as a working place for ideas, drafts, and comparisons.
-- Keep approved, pending, and rejected ideas clearly separated.
-- Do not move anything into the main project until it is approved.
-- Remove or mark outdated variants so the map stays easy to scan.
-- Keep one visual decision visible at a time when possible.
+- Держать карту дизайна отдельно от основного проекта.
+- Хранить черновики, сравнения и промежуточные варианты в одном месте.
+- Не переносить ничего в основной проект без явного подтверждения.
+- Убирать устаревшие варианты, чтобы карта оставалась читаемой.
 
-## Workflow
+## Порядок работы
 
-1. Add a design idea to the map.
-2. Compare it with the current version.
-3. Mark what to keep, change, or remove.
-4. Wait for approval before transferring anything to the main project.
-5. Keep the map clean and current.
+1. Добавить идею в карту.
+2. Сравнить ее с текущим вариантом.
+3. Пометить, что оставить, изменить или убрать.
+4. Дождаться подтверждения перед переносом в основной проект.

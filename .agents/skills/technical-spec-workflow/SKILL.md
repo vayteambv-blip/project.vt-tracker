@@ -1,28 +1,30 @@
 ---
 name: technical-spec-workflow
-description: Convert approved business specs into technical specs without changing the business logic.
+description: Перевод утвержденных бизнес-правил в техническую структуру без изменения смысла. Использовать при подготовке технической спецификации.
 ---
 
-# Technical Spec Workflow
+# Технический спек
 
-Use this skill when moving from approved specs to technical design.
+## Назначение
 
-## Workflow
+Использовать, когда бизнес-правила уже утверждены и нужно превратить их в техническое решение.
 
-1. Take only approved business rules.
-2. Convert them into technical structure:
-   - entities;
-   - relationships;
-   - storage;
-   - sync rules;
-   - file/version handling;
-   - statuses and transitions.
-3. Keep the business meaning unchanged.
-4. Separate technical decisions from product rules.
+## Порядок работы
 
-## Rules
+1. Взять только утвержденные правила.
+2. Перевести их в техническую структуру:
+   - сущности;
+   - связи;
+   - хранение;
+   - синхронизация;
+   - версии файлов;
+   - статусы и переходы.
+3. Не менять смысл правил.
+4. Не добавлять новые продуктовые возможности.
 
-- Do not add new product features.
-- Do not rewrite approved business logic.
-- If a technical choice affects business behavior, ask first.
-- Keep the technical spec clear, minimal, and implementation-ready.
+## Правила
+
+- Не добавлять новые продуктовые фичи.
+- Не переписывать утвержденную бизнес-логику.
+- Если технический выбор меняет поведение продукта, сначала спросить.
+- Держать документ коротким и пригодным для реализации.

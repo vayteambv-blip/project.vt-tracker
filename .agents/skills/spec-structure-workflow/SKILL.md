@@ -1,43 +1,40 @@
 ---
 name: spec-structure-workflow
-description: Keep the project spec tree clean and ordered. Use when organizing or editing spec folders, moving files between Global Spec, Functional Map, Future Spec, Technical Specs, User Stories, and Work Plans, or when checking that spec stages stay separated and in the right order.
+description: Поддержание правильной структуры спека и порядка этапов. Использовать при создании, переносе или правке файлов между стадиями спецификации.
 ---
 
-# Spec Structure Workflow
+# Структура спека
 
-## Overview
+## Назначение
 
-Keep the spec tree in one clean sequence:
-`Global Spec -> Functional Map -> Future Spec -> Technical Specs -> User Stories -> Work Plans`.
+Использовать, чтобы не смешивать разные уровни документации и не дублировать один и тот же смысл в разных местах.
 
-Use this skill when a change affects spec layout, stage order, or file placement.
+## Порядок стадий
 
-## Rules
+`Global Spec -> Functional Map -> Future Spec -> Technical Specs -> User Stories -> Work Plans`
 
-- Keep each stage in its own folder and do not merge stages.
-- Keep business rules in `Global Spec` and `Functional Map`.
-- Keep future questions in `Future Spec` only.
-- Keep implementation details in `Technical Specs` only.
-- Keep user scenarios in `User Stories` only.
-- Keep execution planning in `Work Plans` only.
-- If one rule affects multiple stages, update every related spec together.
-- If a file looks like it belongs to the wrong stage, move or rewrite it before continuing.
-- Do not add extra folders or repeat the same rule in multiple stages without a clear reason.
-- If a rule is already fixed in one stage, keep the other stages to a short reference or a small уточнение, not a full duplicate with the same meaning.
+## Правила
 
-## Workflow
+- Каждая стадия отвечает только за свой слой.
+- Бизнес-правила хранятся в `Global Spec` и `Functional Map`.
+- Будущие уточнения хранятся только в `Future Spec`.
+- Технические решения хранятся только в `Technical Specs`.
+- Сценарии использования хранятся только в `User Stories`.
+- Рабочие планы хранятся только в `Work Plans`.
+- Если правило влияет на несколько стадий, обновить все связанные файлы одновременно.
+- Если правило уже зафиксировано в одном месте, в других файлах оставить только короткое уточнение.
 
-1. Identify the stage first.
-2. Check whether the content is business logic, future clarification, technical design, user scenario, or work planning.
-3. Place the content in the matching stage only.
-4. Verify that the surrounding spec files still agree with the change.
-5. Fix naming, order, or folder placement if it breaks the spec tree.
+## Порядок работы
 
-## Final Check
+1. Определить, к какой стадии относится содержание.
+2. Проверить, не попало ли оно в чужую стадию.
+3. Перенести или переписать запись в правильное место.
+4. Проверить связанные файлы.
+5. Убрать дубли и лишние повторения.
 
-Before finishing, confirm:
+## Финальная проверка
 
-- the order of stages is still correct;
-- no stage contains content from another stage;
-- related files still describe the same rule;
-- the spec tree stays simple, readable, and easy to extend.
+- порядок стадий сохранен;
+- слои не смешаны;
+- связанные файлы говорят об одном и том же;
+- дерево спека осталось простым.

@@ -1,4 +1,4 @@
 interface:
-  display_name: "Facture and Finance Workflow"
-  short_description: "Handles factures, expenses, payments, and profit"
-  default_prompt: "Use this skill to manage factures, project expenses, firm payments, additional work lines, balances, and profit calculations without mixing finance rules."
+  display_name: "Финансы и фактура"
+  short_description: "Ведет расходы, фактуру, допработы и расчет прибыли проекта"
+  default_prompt: "Используй этот skill, чтобы держать финансы проекта согласованными, синхронизировать общую фактуру, раскладывать расходы по правильным категориям и пересчитывать итоги и прибыль без дублей."

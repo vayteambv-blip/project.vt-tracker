@@ -1,26 +1,24 @@
 ---
 name: design-review-workflow
-description: Review design variants and decide what to keep, change, or remove before approval. Use when the user wants a clear comparison of design options, a quick visual review, or a clean decision on what should stay in the Design Map.
+description: Сравнение вариантов дизайна и выбор того, что оставить, изменить или убрать перед утверждением.
 ---
 
-# Design Review Workflow
+# Проверка дизайна
 
-## Overview
+## Назначение
 
-Use this skill to compare design options and keep the result clean.
+Использовать, когда нужно быстро оценить несколько визуальных вариантов и выбрать лучший.
 
-## Rules
+## Правила
 
-- Compare variants side by side when possible.
-- Decide what to keep, change, or remove.
-- Mark weak or outdated options clearly.
-- Keep the review focused on clarity, consistency, and usefulness.
-- Do not let multiple unfinished variants stay mixed together.
+- Сравнивать только реальные варианты.
+- Отмечать, что оставить, что изменить и что убрать.
+- Не смешивать черновики с утвержденным вариантом.
+- Оставлять в работе только то, что действительно улучшает интерфейс.
 
-## Workflow
+## Порядок работы
 
-1. Review the current design option.
-2. Compare it with alternatives if they exist.
-3. Note what is better, what is worse, and what is unnecessary.
-4. Keep the best variant and mark the rest clearly.
-5. Pass only the approved result forward.
+1. Посмотреть все варианты.
+2. Сравнить их по читаемости, ясности и удобству.
+3. Отметить лучший вариант.
+4. Сказать, что нужно изменить или удалить.

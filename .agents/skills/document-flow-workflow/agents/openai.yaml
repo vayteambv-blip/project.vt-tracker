@@ -1,4 +1,4 @@
 interface:
-  display_name: "Document Flow Workflow"
-  short_description: "Manages documents, versions, templates, and file actions"
-  default_prompt: "Use this skill to manage project and firm documents, shared facture sync, file versions, templates, open/download actions, and email sending without losing history."
+  display_name: "Документы и файлы"
+  short_description: "Управляет документами проекта и фирмы, версиями и действиями с файлами"
+  default_prompt: "Используй этот skill, чтобы управлять документами проекта и фирмы, сохранять текущие и архивные версии и оставлять доступными действия открыть, скачать, восстановить и отправить по email из карточки файла."

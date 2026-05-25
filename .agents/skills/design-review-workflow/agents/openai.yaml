@@ -1,4 +1,4 @@
 interface:
-  display_name: "Design Review Workflow"
-  short_description: "Review design options and mark what to keep."
-  default_prompt: "Use this skill to review design options, compare variants, and decide what should stay, what should change, and what should be dropped before approval."
+  display_name: "Проверка дизайна"
+  short_description: "Сравнивает варианты дизайна и помогает выбрать, что оставить, изменить или убрать"
+  default_prompt: "Используй этот skill, когда нужно сравнить несколько визуальных вариантов, выбрать лучший и сказать, что оставить, что изменить или что убрать."

@@ -1,36 +1,34 @@
 ---
 name: document-flow-workflow
-description: Manage project and firm documents, templates, file versions, and file actions. Use when working with estimates, contracts, factures, acts, templates, open/download actions, email sending, and archive versions.
+description: Документы проекта и фирмы, текущие версии, архив и действия с файлами. Использовать при работе со сметами, контрактами, фактурами, актами, шаблонами и отправкой файлов по email.
 ---
 
-# Document Flow Workflow
+# Документы и файлы
 
-## Overview
+## Назначение
 
-Use this skill to keep document handling clean and predictable across project, firm, and shared facture contexts.
+Использовать, чтобы документы были разделены, версии не терялись, а файл можно было открыть, скачать или отправить.
 
-## Rules
+## Правила
 
-- Keep project documents and firm documents separate.
-- Treat shared facture as one synchronized document with one history.
-- Keep current files and archived versions available.
-- Keep templates as drafts, not as active records.
-- Allow open, download, restore, and email actions from the file card.
+- Документы проекта и документы фирмы хранятся отдельно.
+- Текущая версия файла отделена от архивных версий.
+- При замене файла старая версия остается в истории.
+- Шаблоны хранятся как черновики, а не как активные записи.
+- Файл можно открыть, скачать, восстановить и отправить по email из карточки.
 
-## Workflow
+## Порядок работы
 
-1. Identify the document context.
-2. Decide whether the document belongs to project, firm, or shared facture.
-3. Save the current file.
-4. Preserve old versions as archive.
-5. Allow retrieval and restoration without breaking history.
+1. Определить контекст документа.
+2. Понять, относится ли файл к проекту, фирме или общей фактуре.
+3. Сохранить текущую версию.
+4. Сохранить старые версии как архив.
+5. Проверить, что действия с файлом остаются доступными.
 
-## Final Check
+## Финальная проверка
 
-Before finishing, confirm:
-
-- the document is in the correct context;
-- the current file is visible;
-- archive versions are preserved;
-- the shared facture remains synchronized;
-- file actions still work from the card.
+- документ лежит в правильном контексте;
+- текущая версия видна;
+- архивные версии сохранены;
+- общая фактура остается синхронизированной;
+- файл по-прежнему можно открыть, скачать и отправить.

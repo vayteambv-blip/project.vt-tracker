@@ -1,4 +1,4 @@
 interface:
-  display_name: "Project Creation Workflow"
-  short_description: "Guides safe project creation from client to estimate"
-  default_prompt: "Use this skill to create projects in the correct order, verify client, address, direction, approved estimate, and initial project data, and keep the creation flow clean."
+  display_name: "Создание проекта"
+  short_description: "Ведет создание проекта по правильному порядку и обязательным проверкам"
+  default_prompt: "Используй этот skill, чтобы создавать проект в правильном порядке, проверять клиента, адрес, направление, согласованную смету и дату старта, а также держать процесс создания чистым."

@@ -1,4 +1,4 @@
 interface:
-  display_name: "Visual Guidelines Workflow"
-  short_description: "Set visual rules for the project UI."
-  default_prompt: "Use this skill to define and maintain the visual rules for the project UI: colors, typography, spacing, components, states, and responsive consistency."
+  display_name: "Визуальные правила"
+  short_description: "Определяет единый визуальный язык интерфейса проекта"
+  default_prompt: "Используй этот skill, чтобы держать интерфейс визуально единым, читаемым и адаптивным на всех экранах без изменения логики продукта."

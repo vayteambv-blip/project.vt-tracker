@@ -1,36 +1,33 @@
 ---
 name: calendar-synchronization-workflow
-description: Sync project dates with calendar views and direction-based planning. Use when setting start dates, moving projects between future and current views, or checking calendar-to-project synchronization.
+description: Синхронизация даты старта между проектом и календарем. Использовать при назначении, переносе или проверке даты старта и календарного отображения проекта.
 ---
 
-# Calendar Synchronization Workflow
+# Синхронизация календаря
 
-## Overview
+## Назначение
 
-Use this skill to keep the calendar aligned with the project without turning it into a second database.
+Использовать, чтобы календарь не становился второй базой данных и всегда совпадал с проектом.
 
-## Rules
+## Правила
 
-- The project is the source of truth for dates.
-- The calendar shows projects, not separate work items.
-- Show future and current planning by direction.
-- Show all involved firms as a list.
-- Do not show projects without a start date.
+- Проект является источником истины для даты старта.
+- Календарь показывает только проекты, а не отдельные работы.
+- Если даты старта нет, проект не показывается в календаре.
+- Изменение даты в проекте и в календаре должно синхронизироваться в обе стороны.
+- Календарь показывает проекты по направлениям и периодам, но не дублирует лишние данные.
 
-## Workflow
+## Порядок работы
 
-1. Read the project date.
-2. Place the project in the correct calendar view.
-3. Update the project if the calendar date changes.
-4. Keep direction filters and firm lists visible.
-5. Keep calendar data minimal and synced.
+1. Проверить дату старта проекта.
+2. Поместить проект в правильный календарный вид.
+3. Если дата меняется в календаре, обновить проект.
+4. Если дата меняется в проекте, обновить календарь.
+5. Проверить, что проект не потерял связи.
 
-## Final Check
+## Финальная проверка
 
-Before finishing, confirm:
-
-- the project date is synchronized;
-- the project appears in the correct calendar view;
-- no project without a start date is shown;
-- the calendar still acts as an overview only;
-- the project opens fully from the calendar entry.
+- дата старта совпадает в проекте и календаре;
+- проект виден в правильном календаре;
+- проект без даты старта скрыт;
+- календарь остается только обзором.

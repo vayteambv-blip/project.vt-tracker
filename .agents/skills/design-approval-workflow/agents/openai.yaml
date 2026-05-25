@@ -1,4 +1,4 @@
 interface:
-  display_name: "Design Approval Workflow"
-  short_description: "Track what is approved before it reaches the main project."
-  default_prompt: "Use this skill to track approvals for design ideas, ensuring nothing moves into the main project until the user has clearly approved it."
+  display_name: "Подтверждение дизайна"
+  short_description: "Не дает переносить дизайн в основной проект до явного одобрения"
+  default_prompt: "Используй этот skill, когда дизайн должен оставаться черновиком до явного одобрения перед переносом в основной проект."

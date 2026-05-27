@@ -1,20 +1,89 @@
-import { AppShell } from "@/components/app-shell";
-import { clientCards, clientStats } from "@/lib/client-overview";
+"use client";
 
-const clientTone: Record<(typeof clientCards)[number]["status"], string> = {
-  Complete: "status status-current",
-  "In progress": "status status-prep",
-};
+import { AppShell } from "@/components/app-shell";
+import { ClientStoragePanel } from "@/components/client-storage-panel";
+import { useLocale } from "@/components/locale-provider";
+import { getClientOverview, type ClientCard } from "@/lib/client-overview";
+
+const content = {
+  ru: {
+    title: "Клиенты",
+    description:
+      "Здесь живут частные клиенты и фирмы-заказчики. Этот раздел держит контактные данные, полноту заполнения и связанные проекты раздельно и понятно.",
+    rulesTitle: "Правила клиентов в работе",
+    actionsTitle: "Основные действия",
+    projectLinks: "Проекты связаны: ",
+    address: "Адрес",
+    phone: "Телефон",
+    email: "Эл. почта",
+    openProject: "Открыть связанные проекты",
+    ruleItems: [
+      "Один проект связан с одним клиентом.",
+      "Документы не хранятся на клиенте.",
+      "Перед сохранением должна быть видна полнота данных.",
+      "Поиск должен быстро приводить к нужному клиенту.",
+    ],
+    actionItems: [
+      "Создать нового частного клиента или фирму-заказчика.",
+      "Открыть связанные проекты из карточки клиента.",
+      "Продолжить заполнение незавершенных данных позже.",
+      "Держать список клиентов чистым и удобным для поиска.",
+    ],
+    status: {
+      Complete: "Полный",
+      "In progress": "В работе",
+    },
+    type: {
+      Private: "Частный",
+      Company: "Фирма",
+    },
+  },
+  nl: {
+    title: "Klanten",
+    description:
+      "Hier staan particuliere klanten en opdrachtgevers. Deze sectie houdt contactgegevens, volledigheid en gekoppelde projecten gescheiden en duidelijk.",
+    rulesTitle: "Klantregels in gebruik",
+    actionsTitle: "Belangrijkste acties",
+    projectLinks: "Gekoppelde projecten: ",
+    address: "Adres",
+    phone: "Telefoon",
+    email: "E-mail",
+    openProject: "Open gekoppelde projecten",
+    ruleItems: [
+      "Eén project hoort bij één klant.",
+      "Documenten worden niet op de klant zelf opgeslagen.",
+      "Voor het opslaan moet de volledigheid zichtbaar zijn.",
+      "Zoeken moet snel naar de juiste klant leiden.",
+    ],
+    actionItems: [
+      "Maak een nieuwe particuliere klant of opdrachtgever aan.",
+      "Open gekoppelde projecten vanuit de klantkaart.",
+      "Ga later verder met onvolledige gegevens.",
+      "Houd de klantenlijst schoon en makkelijk doorzoekbaar.",
+    ],
+    status: {
+      Complete: "Volledig",
+      "In progress": "In bewerking",
+    },
+    type: {
+      Private: "Particulier",
+      Company: "Bedrijf",
+    },
+  },
+} as const;
+
+type ClientStatus = ClientCard["status"];
 
 export default function ClientsPage() {
+  const { locale } = useLocale();
+  const overview = getClientOverview(locale);
+  const copy = content[locale];
+
   return (
-    <AppShell
-      title="Clients"
-      description="Private clients and company customers live here. This workspace keeps contact data, completeness, and linked projects clearly separated."
-    >
+    <AppShell title={copy.title} description={copy.description}>
       <section className="dashboard">
         <div className="summary-grid">
-          {clientStats.map((stat) => (
+          {overview.clientStats.map((stat) => (
             <article className="summary-card" key={stat.label}>
               <div className="label">{stat.label}</div>
               <div className="metric">{stat.value}</div>
@@ -24,52 +93,57 @@ export default function ClientsPage() {
 
         <section className="panel-grid">
           <article className="panel">
-            <h2>Client rules in practice</h2>
+            <h2>{copy.rulesTitle}</h2>
             <ul className="bullet-list">
-              <li>One project links to one client.</li>
-              <li>Documents are not stored on the client.</li>
-              <li>Completeness must be visible before save.</li>
-              <li>Search should get me to the right client fast.</li>
+              {copy.ruleItems.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
           </article>
 
           <article className="panel">
-            <h2>Key actions</h2>
+            <h2>{copy.actionsTitle}</h2>
             <ul className="check-list">
-              <li>Create a new private client or company customer.</li>
-              <li>Open linked projects from the client card.</li>
-              <li>Continue editing unfinished client data later.</li>
-              <li>Keep the client list clean and searchable.</li>
+              {copy.actionItems.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
           </article>
         </section>
 
         <section className="entity-grid">
-          {clientCards.map((client) => (
+          {overview.clientCards.map((client) => (
             <article className="entity-card" key={client.name}>
               <div className="entity-topline">
-                <span className={clientTone[client.status]}>{client.status}</span>
-                <span className="direction">{client.type}</span>
+                <span className={client.status === "Complete" ? "status status-current" : "status status-prep"}>
+                  {copy.status[client.status as ClientStatus]}
+                </span>
+                <span className="direction">{copy.type[client.type]}</span>
               </div>
               <h3>{client.name}</h3>
-              <p className="entity-note">Projects linked: {client.projects}</p>
+              <p className="entity-note">
+                {copy.projectLinks}
+                {client.projects}
+              </p>
               <dl className="project-meta">
                 <div>
-                  <dt>Address</dt>
+                  <dt>{copy.address}</dt>
                   <dd>{client.address}</dd>
                 </div>
                 <div>
-                  <dt>Phone</dt>
+                  <dt>{copy.phone}</dt>
                   <dd>{client.phone}</dd>
                 </div>
                 <div>
-                  <dt>Email</dt>
+                  <dt>{copy.email}</dt>
                   <dd>{client.email}</dd>
                 </div>
               </dl>
             </article>
           ))}
         </section>
+
+        <ClientStoragePanel />
       </section>
     </AppShell>
   );

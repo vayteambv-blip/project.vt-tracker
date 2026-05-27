@@ -1,3 +1,5 @@
+import type { Locale } from "@/lib/locale";
+
 export type FirmCard = {
   name: string;
   role: "Executor" | "Customer";
@@ -7,44 +9,99 @@ export type FirmCard = {
   paymentPath: string;
 };
 
-export const firmStats = [
-  { label: "Firms total", value: "14" },
-  { label: "Active firms", value: "9" },
-  { label: "Workers tracked", value: "27" },
-  { label: "Contracts linked", value: "11" },
-];
+type FirmOverview = {
+  firmStats: Array<{ label: string; value: string }>;
+  firmCards: FirmCard[];
+};
 
-export const firmCards: FirmCard[] = [
-  {
-    name: "Apex Roofing",
-    role: "Executor",
-    status: "Active",
-    workers: 6,
-    projects: 4,
-    paymentPath: "Paid through project costs",
+const overview: Record<Locale, FirmOverview> = {
+  ru: {
+    firmStats: [
+      { label: "Всего фирм", value: "14" },
+      { label: "Активных фирм", value: "9" },
+      { label: "Учтено рабочих", value: "27" },
+      { label: "Привязано контрактов", value: "11" },
+    ],
+    firmCards: [
+      {
+        name: "Кровля Плюс",
+        role: "Executor",
+        status: "Active",
+        workers: 6,
+        projects: 4,
+        paymentPath: "Оплата проходит через расходы проекта",
+      },
+      {
+        name: "Подъем-Скай",
+        role: "Executor",
+        status: "Linked",
+        workers: 3,
+        projects: 2,
+        paymentPath: "Привязана к одному текущему проекту",
+      },
+      {
+        name: "Городской мастер",
+        role: "Executor",
+        status: "Active",
+        workers: 5,
+        projects: 3,
+        paymentPath: "Оплата проходит через расходы проекта",
+      },
+      {
+        name: "КаркасПлюс",
+        role: "Customer",
+        status: "Active",
+        workers: 4,
+        projects: 1,
+        paymentPath: "Использует поток расходов проекта",
+      },
+    ],
   },
-  {
-    name: "SkyLift",
-    role: "Executor",
-    status: "Linked",
-    workers: 3,
-    projects: 2,
-    paymentPath: "Linked to one current project",
+  nl: {
+    firmStats: [
+      { label: "Totaal bedrijven", value: "14" },
+      { label: "Actieve bedrijven", value: "9" },
+      { label: "Werknemers geregistreerd", value: "27" },
+      { label: "Contracten gekoppeld", value: "11" },
+    ],
+    firmCards: [
+      {
+        name: "DakPlus",
+        role: "Executor",
+        status: "Active",
+        workers: 6,
+        projects: 4,
+        paymentPath: "Betaling loopt via de projectkosten",
+      },
+      {
+        name: "LuchtLift",
+        role: "Executor",
+        status: "Linked",
+        workers: 3,
+        projects: 2,
+        paymentPath: "Gekoppeld aan één lopend project",
+      },
+      {
+        name: "Stedelijk Vakwerk",
+        role: "Executor",
+        status: "Active",
+        workers: 5,
+        projects: 3,
+        paymentPath: "Betaling loopt via de projectkosten",
+      },
+      {
+        name: "Raamwerk",
+        role: "Customer",
+        status: "Active",
+        workers: 4,
+        projects: 1,
+        paymentPath: "Gebruikt de kostenstroom van het project",
+      },
+    ],
   },
-  {
-    name: "UrbanCraft",
-    role: "Executor",
-    status: "Active",
-    workers: 5,
-    projects: 3,
-    paymentPath: "Paid through project costs",
-  },
-  {
-    name: "FrameWorks",
-    role: "Customer",
-    status: "Active",
-    workers: 4,
-    projects: 1,
-    paymentPath: "Uses project expense flow",
-  },
-];
+};
+
+export function getFirmOverview(locale: Locale): FirmOverview {
+  return overview[locale];
+}
+

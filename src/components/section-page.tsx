@@ -20,7 +20,7 @@ export function SectionPage({
     <AppShell title={title} description={description}>
       <section className="panel-grid">
         <article className="panel">
-          <h2>What this area covers</h2>
+          <h2>Что покрывает этот раздел</h2>
           <ul className="bullet-list">
             {focus.map((item) => (
               <li key={item}>{item}</li>
@@ -29,7 +29,7 @@ export function SectionPage({
         </article>
 
         <article className="panel">
-          <h2>Next build steps</h2>
+          <h2>Следующие шаги разработки</h2>
           <ul className="bullet-list">
             {nextSteps.map((item) => (
               <li key={item}>{item}</li>
@@ -37,7 +37,7 @@ export function SectionPage({
           </ul>
           <div className="panel-actions">
             <Link className="ghost-link" href={backHref}>
-              Back to overview
+              Назад к обзору
             </Link>
           </div>
         </article>

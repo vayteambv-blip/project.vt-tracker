@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { useLocale } from "@/components/locale-provider";
 
 export default function NotFound() {
+  const { locale } = useLocale();
+
   return (
     <main
       style={{
@@ -22,18 +27,22 @@ export default function NotFound() {
           boxShadow: "var(--shadow)",
         }}
       >
-        <p className="eyebrow">Not found</p>
-        <h1 style={{ margin: "12px 0" }}>This page does not exist yet.</h1>
+        <p className="eyebrow">{locale === "ru" ? "Не найдено" : "Niet gevonden"}</p>
+        <h1 style={{ margin: "12px 0" }}>
+          {locale === "ru" ? "Этой страницы пока не существует." : "Deze pagina bestaat nog niet."}
+        </h1>
         <p style={{ color: "var(--text-soft)", lineHeight: 1.6 }}>
-          Go back to the main dashboard and continue building the project
-          sections from there.
+          {locale === "ru"
+            ? "Вернись на главную панель и продолжай работу с разделами проекта оттуда."
+            : "Ga terug naar het startpaneel en werk van daaruit verder met de projectsecties."}
         </p>
         <div style={{ marginTop: "18px" }}>
           <Link className="ghost-link" href="/">
-            Back to home
+            {locale === "ru" ? "Назад на главную" : "Terug naar start"}
           </Link>
         </div>
       </div>
     </main>
   );
 }
+

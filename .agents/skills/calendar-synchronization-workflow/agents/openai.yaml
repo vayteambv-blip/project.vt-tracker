@@ -1,4 +1,4 @@
 interface:
-  display_name: "Calendar Synchronization Workflow"
-  short_description: "Syncs project dates with calendar views"
-  default_prompt: "Use this skill to synchronize project dates with calendar views, separate future and current planning, and keep calendar data aligned with the project."
+  display_name: "Синхронизация календаря"
+  short_description: "Синхронизирует дату старта между проектом и календарем"
+  default_prompt: "Используй этот skill, чтобы синхронизировать дату старта проекта с календарем, скрывать проекты без даты старта и оставлять календарь только обзором."

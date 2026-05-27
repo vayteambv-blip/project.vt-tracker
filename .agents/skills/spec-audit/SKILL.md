@@ -1,33 +1,33 @@
 ---
 name: spec-audit
-description: Audit project specs for duplicates, gray zones, omissions, and contradictions before the next stage.
+description: Аудит спеки на дубли, серые зоны, пробелы и противоречия. Использовать перед следующей стадией или перед крупной правкой документации.
 ---
 
-# Spec Audit
+# Аудит спека
 
-Use this skill when checking specs for:
-- duplicates;
-- gray zones;
-- missing important points;
-- contradictions across files.
+Использовать, когда нужно быстро понять, где в спеках есть:
+- дубли;
+- серые зоны;
+- пропуски;
+- противоречия.
 
-## Workflow
+## Порядок работы
 
-1. Read the relevant spec files.
-2. Compare overlapping rules across files.
-3. Mark what is:
-   - consistent;
-   - duplicated;
-   - unclear;
-   - conflicting.
-4. Report a short result:
-   - what to keep;
-   - what to remove;
-   - what to clarify.
+1. Прочитать связанные файлы.
+2. Сравнить пересекающиеся правила.
+3. Отметить, что:
+   - согласовано;
+   - повторяется;
+   - неясно;
+   - конфликтует.
+4. Коротко показать результат:
+   - что оставить;
+   - что убрать;
+   - что уточнить.
 
-## Rules
+## Правила
 
-- Do not invent new business rules.
-- Do not change meaning without user approval.
-- Prefer one source of truth for each rule.
-- If a point is unclear, surface it before editing anything.
+- Не придумывать новые правила.
+- Не менять смысл без подтверждения пользователя.
+- Для каждого правила оставлять одну главную точку истины.
+- Если что-то неясно, сначала показать это пользователю, а не править вслепую.

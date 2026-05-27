@@ -1,34 +1,32 @@
 ---
 name: notification-workflow
-description: Manage practical reminders and deadline alerts for the project. Use when setting alerts for start dates, completion warnings, missing data, or other important deadlines without duplicating calendar behavior.
+description: Практические напоминания и предупреждения по проекту. Использовать при настройке уведомлений о старте, недостающих данных и важных сроках.
 ---
 
-# Notification Workflow
+# Уведомления
 
-## Overview
+## Назначение
 
-Use this skill to make reminders useful, direct, and separate from calendar display logic.
+Использовать только для полезных напоминаний, которые помогают действовать вовремя.
 
-## Rules
+## Правила
 
-- Remind only about important actions and deadlines.
-- Do not duplicate the calendar.
-- Keep reminders tied to the project and date.
-- Use reminders for missing data, start warnings, and completion warnings.
+- Напоминание должно быть коротким и по делу.
+- Не дублировать календарь.
+- Связывать уведомление с проектом и датой.
+- Использовать напоминания для старта, завершения и недостающих данных.
 
-## Workflow
+## Порядок работы
 
-1. Identify the event that needs a reminder.
-2. Check the project date or missing-data condition.
-3. Create a single reminder with the right timing.
-4. Avoid duplicate alerts for the same event.
-5. Keep the reminder short and practical.
+1. Определить событие.
+2. Проверить дату или недостающие данные.
+3. Создать одно понятное напоминание.
+4. Не делать дубликаты на одно и то же событие.
+5. Проверить, что уведомление помогает, а не мешает.
 
-## Final Check
+## Финальная проверка
 
-Before finishing, confirm:
-
-- the reminder has one clear purpose;
-- the timing is correct;
-- the reminder does not replace calendar logic;
-- the reminder helps action, not clutter.
+- у напоминания есть одна цель;
+- время выбрано правильно;
+- календарь не заменен уведомлением;
+- в интерфейсе нет лишнего шума.

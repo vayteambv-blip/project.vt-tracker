@@ -1,36 +1,34 @@
 ---
 name: firm-management-workflow
-description: Manage firms, workers, contracts, project links, and firm history. Use when creating or editing a firm, attaching it to projects, handling workers, contracts, or firm-level facture history.
+description: Управление фирмами, рабочими, контрактами и связями с проектами. Использовать при создании или редактировании фирмы, привязке к проекту и проверке фирменных данных.
 ---
 
-# Firm Management Workflow
+# Управление фирмой
 
-## Overview
+## Назначение
 
-Use this skill to keep firm data clean, separate, and tied to the right project context.
+Использовать, чтобы фирма оставалась отдельной сущностью и не смешивалась с клиентом или проектом.
 
-## Rules
+## Правила
 
-- A firm is not a client.
-- A firm can be executor or customer depending on the project.
-- Store firm contracts, workers, and firm history inside the firm.
-- Do not store materials, photos, reports, or separate finance blocks in the firm.
-- Keep firm factures visible as history, but still tied to project context.
+- Фирма не является клиентом.
+- Роль фирмы в проекте задается на уровне проекта.
+- Фирма хранит документы, контракты, рабочих и историю.
+- У фирмы нет отдельного финансового блока.
+- У фирмы нет постоянной специализации.
 
-## Workflow
+## Порядок работы
 
-1. Identify the firm role in the project.
-2. Attach the firm to the project.
-3. Check the contract and worker list.
-4. Keep firm history separate from project-only data.
-5. Show the firm project overview without duplicating project details.
+1. Определить роль фирмы в проекте.
+2. Проверить контракт и данные фирмы.
+3. Проверить список рабочих.
+4. Убедиться, что проектные данные не продублированы в фирме.
+5. Сохранить связь только в нужном месте.
 
-## Final Check
+## Финальная проверка
 
-Before finishing, confirm:
-
-- the firm is not treated as a client;
-- the role in the project is clear;
-- the contract is attached correctly;
-- workers stay under the right firm;
-- project-only data is not copied into the firm.
+- фирма не перепутана с клиентом;
+- роль в проекте ясна;
+- контракт привязан правильно;
+- рабочие лежат под своей фирмой;
+- проектные данные не скопированы в фирму.

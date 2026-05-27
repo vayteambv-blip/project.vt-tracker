@@ -1,35 +1,33 @@
 ---
 name: entity-validation-workflow
-description: Validate project entities before saving. Use when creating or editing clients, firms, projects, documents, factures, reports, or related records and when checking required fields, completeness, and entity separation.
+description: Проверка полноты и чистоты сущностей перед сохранением. Использовать при создании или редактировании клиента, фирмы, проекта, документа, отчета, фактуры и связанных записей.
 ---
 
-# Entity Validation Workflow
+# Проверка сущностей
 
-## Overview
+## Назначение
 
-Use this skill to check that an entity is complete, consistent, and belongs to the right place before saving it.
+Использовать, когда нужно проверить, можно ли безопасно сохранять запись без пропусков и смешивания данных.
 
-## Rules
+## Правила
 
-- Check required fields first.
-- Do not save partial or mixed entities.
-- Keep client, firm, project, document, facture, and report data separated.
-- Show exactly what is missing before saving.
-- If a field belongs to another entity, move the data there instead of duplicating it.
+- Проверять обязательные поля до сохранения.
+- Не сохранять частичные или смешанные сущности.
+- Держать клиента, фирму, проект, документ, отчет и фактуру отдельно.
+- Показывать, что именно не хватает.
+- Если поле относится к другой сущности, перенести его туда, а не дублировать.
 
-## Workflow
+## Порядок работы
 
-1. Identify the entity type.
-2. Check mandatory fields for that entity.
-3. Check whether the data belongs to one entity only.
-4. Report missing or conflicting fields.
-5. Save only after the entity is complete and clean.
+1. Определить тип сущности.
+2. Проверить обязательные поля.
+3. Проверить, не смешаны ли данные разных сущностей.
+4. Показать недочеты и конфликты.
+5. Сохранять только после полной проверки.
 
-## Final Check
+## Финальная проверка
 
-Before finishing, confirm:
-
-- all required fields are filled;
-- the entity is stored in the correct place;
-- no duplicate meaning was added elsewhere;
-- the save action will not create later conflicts.
+- все обязательные поля заполнены;
+- сущность хранится в правильном месте;
+- новый дубль смысла не появился;
+- сохранение не создаст будущий конфликт.

@@ -1,26 +1,52 @@
 # Проект VT Tracker
 
-Репозиторий подготовлен для работы с Codex.
+Репозиторий для работы с Codex, проектной документацией и фронтендом на Next.js + TypeScript.
 
 ## Структура
 
-- `.agents/skills/pilot-spec-workflow/SKILL.md` - инструкция для Codex по работе со спецификациями и правилами проекта.
-- `Specs/01-global-spec-md/global-spec.md` - общий контекст, цели, ограничения и терминология.
-- `Specs/02-functional-map-md/functional-map.md` - описание функций проекта.
-- `Specs/03-future-spec-md/future-spec.md` - следующий этап после функциональной карты.
-- `Specs/04-technical-specs/technical-spec.md` - технические решения и теория.
-- `Specs/05-user-stories/user-stories.md` - пользовательские истории и сценарии.
-- `06-work-plans/active/work-plans.md` - активные планы работ.
-- `06-work-plans/inactive/template-plan.md` - шаблон для отложенных планов.
+- `.agents/skills` - навыки Codex по рабочим сценариям проекта.
+- `Specs/01-global-spec-md/global-spec.md` - общий контекст.
+- `Specs/02-functional-map-md/functional-map.md` - функциональная карта.
+- `Specs/03-future-spec-md/future-spec.md` - будущие уточнения.
+- `Specs/04-technical-specs/technical-spec.md` - техническая спецификация.
+- `Specs/05-user-stories/user-stories.md` - пользовательские истории.
+- `Specs/06-work-plans/work-plans.md` - рабочие планы.
 
-## Порядок
+## Фронтенд
 
-1. `.agents/skills/pilot-spec-workflow`
-2. `Specs`
-3. `06-work-plans`
+- `src/app` - маршруты и страницы Next.js.
+- `src/components` - переиспользуемые UI-блоки.
+- `src/lib` - общие данные и конфигурация интерфейса.
 
-## Правила
+## Запуск
 
-- Каждый спек хранится в отдельном `.md`-файле.
-- Названия файлов должны быть короткими, понятными и без дубликатов.
-- Структура не должна расползаться по лишним папкам и временным файлам.
+1. `npm install`
+2. `npm run dev`
+3. Открыть `http://localhost:3000`
+
+## Основные skills
+
+- `entity-validation-workflow`
+- `project-creation-workflow`
+- `calendar-synchronization-workflow`
+- `document-flow-workflow`
+- `facture-and-finance-workflow`
+- `firm-management-workflow`
+- `archive-return-workflow`
+- `spec-structure-workflow`
+- `spec-audit`
+- `technical-spec-workflow`
+- `notification-workflow`
+- `visual-guidelines-workflow`
+
+## Дизайн skills
+
+- `design-map-workflow`
+- `design-review-workflow`
+- `design-approval-workflow`
+
+## Правило
+
+- Один файл отвечает за одну часть смысла.
+- Дублировать одно и то же правило в разных местах не нужно.
+- Если правило меняется, проверять связанные спеки и связанный skill.

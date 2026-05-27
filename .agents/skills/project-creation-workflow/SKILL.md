@@ -1,36 +1,34 @@
 ---
 name: project-creation-workflow
-description: Create projects in the correct order. Use when starting a new project, checking the client, address, direction, estimate, status, and calendar start data before the project is saved.
+description: Создание проекта в правильном порядке. Использовать при начале нового проекта, проверке клиента, адреса, направления, сметы и даты старта перед сохранением.
 ---
 
-# Project Creation Workflow
+# Создание проекта
 
-## Overview
+## Назначение
 
-Use this skill to create a project from the first step to the first saved record without missing the project rules.
+Использовать, когда проект создается с нуля и его нужно провести через правильные обязательные шаги.
 
-## Rules
+## Правила
 
-- A project represents one work and one direction.
-- Check the client, address, direction, and approved estimate before saving.
-- Do not require extra documents for creation if the spec says they can be added later.
-- Keep the project ready for calendar sync from the start date.
-- Keep the project status manual.
+- Один проект соответствует одной работе и одному направлению.
+- Сначала проверить клиента, адрес, email, телефон и согласованную смету.
+- Если дата старта уже есть, она должна быть связана с календарем.
+- Лишние документы для создания не требуются, если их можно добавить позже.
+- Статус проекта меняется вручную.
 
-## Workflow
+## Порядок работы
 
-1. Identify the client.
-2. Confirm the address and work direction.
-3. Check the approved estimate.
-4. Confirm the project can be created.
-5. Save the project with the right status and calendar relation.
+1. Определить клиента.
+2. Проверить адрес и направление.
+3. Проверить согласованную смету.
+4. Проверить дату старта и связь с календарем.
+5. Сохранить только если все обязательное заполнено.
 
-## Final Check
+## Финальная проверка
 
-Before finishing, confirm:
-
-- the client is valid;
-- the address is set;
-- the direction is single and clear;
-- the estimate is approved;
-- the project can sync with the calendar later.
+- клиент валиден;
+- адрес и контакты есть;
+- направление одно;
+- смета согласована;
+- дата старта не ломает календарь.

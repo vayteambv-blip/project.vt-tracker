@@ -1,4 +1,4 @@
 interface:
-  display_name: "Notification Workflow"
-  short_description: "Creates practical reminders and deadline alerts"
-  default_prompt: "Use this skill to manage practical reminders, deadline alerts, and completion warnings without duplicating calendar behavior."
+  display_name: "Уведомления"
+  short_description: "Создает короткие и полезные напоминания по проекту"
+  default_prompt: "Используй этот skill, чтобы создавать практичные напоминания по датам проекта, недостающим данным и важным срокам без дублирования логики календаря."

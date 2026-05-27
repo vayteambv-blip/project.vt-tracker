@@ -1,35 +1,33 @@
 ---
 name: facture-and-finance-workflow
-description: Manage factures, expenses, firm payments, additional work lines, balances, and profit calculations. Use when editing finance data, syncing factures, or checking project cost and profit logic.
+description: Финансы, расходы, допработы и прибыль проекта. Использовать при редактировании денежных данных, синхронизации фактуры и проверке расчета прибыли.
 ---
 
-# Facture and Finance Workflow
+# Финансы и фактура
 
-## Overview
+## Назначение
 
-Use this skill to keep the money side of the project consistent and easy to read.
+Использовать, когда нужно изменить или проверить деньги проекта без дублирования данных.
 
-## Rules
+## Правила
 
-- Treat shared facture as one synchronized entity between project and firm.
-- Keep expense categories fixed and separate.
-- Keep additional work as a separate line inside the current project.
-- Do not create a separate firm finance block.
-- Calculate profit from base estimate, additional work, and all expenses.
+- Расходы хранятся только в финансах.
+- У фирмы нет отдельного финансового блока.
+- Фактура является одной общей синхронизированной сущностью между проектом и фирмой.
+- Допработы хранятся отдельной строкой внутри текущего проекта.
+- Прибыль считается как смета плюс допработы минус все расходы.
 
-## Workflow
+## Порядок работы
 
-1. Identify the project.
-2. Add or review the facture.
-3. Add expenses under the right category.
-4. Keep additional work separate from normal expenses.
-5. Recalculate totals, balances, and profit.
+1. Определить проект.
+2. Проверить фактуру и связанные суммы.
+3. Добавить или проверить расходы по нужной категории.
+4. Отдельно учесть допработы.
+5. Пересчитать итог, остаток и прибыль.
 
-## Final Check
+## Финальная проверка
 
-Before finishing, confirm:
-
-- factures are synchronized correctly;
-- expenses are in the right category;
-- additional work did not become a new project by mistake;
-- totals and profit still match the project logic.
+- фактура синхронизирована;
+- расходы лежат в правильной категории;
+- допработа не превратилась в новый проект;
+- итог и прибыль совпадают с логикой проекта.

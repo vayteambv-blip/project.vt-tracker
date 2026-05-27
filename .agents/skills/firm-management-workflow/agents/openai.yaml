@@ -1,4 +1,4 @@
 interface:
-  display_name: "Firm Management Workflow"
-  short_description: "Manages firms, contracts, workers, and project links"
-  default_prompt: "Use this skill to manage firms, firm contracts, workers, project links, and firm history without mixing firms with clients or project-only data."
+  display_name: "Управление фирмой"
+  short_description: "Ведет данные фирмы, рабочих, контрактов и проектных связей"
+  default_prompt: "Используй этот skill, чтобы создавать или редактировать фирму, проверять ее роль в проекте, контролировать контракты и рабочих и держать данные фирмы отдельно от клиента и проекта."

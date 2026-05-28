@@ -8,11 +8,11 @@ import { useLocale } from "@/components/locale-provider";
 const content = {
   ru: {
     title: "Финансы",
-    description: "Расходы, поток фактуры, оплаты фирм, остаток и расчет прибыли живут здесь.",
+    description: "Расходы, поток фактуры, оплаты субподрядчикам, остаток и расчет прибыли живут здесь.",
     stats: [
       { label: "Общие расходы", value: "€128k" },
       { label: "Прибыль", value: "€34k" },
-      { label: "Связанных фирм", value: "7" },
+      { label: "Связанных субподрядчиков", value: "7" },
       { label: "Открытых счетов", value: "3" },
     ],
     rulesTitle: "Правила финансов в работе",
@@ -23,15 +23,15 @@ const content = {
       "Финансы — это единственное место, где должны жить общие суммы, остаток и прибыль. Карточка проекта должна ссылаться на результат, а не дублировать его.",
     focusItems: [
       "Держать финансы как единственное место для итогов и прибыли.",
-      "Отслеживать оплаты фирм через расходы проекта.",
+      "Отслеживать оплаты субподрядчикам через расходы проекта.",
       "Не дублировать суммы внутри карточки проекта.",
-      "Держать фактуру и дополнительные работы в одном финансовом потоке.",
+      "Держать фактуру и реальные расходы в одном финансовом потоке.",
     ],
     stepItems: [
       "Открыть финансовый вид проекта.",
-      "Добавить расходы, оплаты и дополнительные работы.",
+      "Добавить расходы и оплаты.",
       "Проверить текущий баланс и прибыль.",
-      "Сравнить результат с карточками проекта и фирмы.",
+      "Сравнить результат с карточками проекта и субподрядчика.",
     ],
     entries: [
       {
@@ -40,12 +40,12 @@ const content = {
         amount: "€68k",
       },
       {
-        label: "Дополнительные работы",
-        note: "Дополнительные работы, добавленные после основной сметы.",
+        label: "Непредвиденные расходы",
+        note: "Расходы, которые не входили в основной расчет и должны учитываться отдельно.",
         amount: "€14k",
       },
       {
-        label: "Оплаты фирм",
+        label: "Оплаты субподрядчикам",
         note: "Оплаты, проходящие через расходы проекта.",
         amount: "€36k",
       },
@@ -53,11 +53,11 @@ const content = {
   },
   nl: {
     title: "Financiën",
-    description: "Kosten, factuurstroom, betalingen aan bedrijven, saldo en winstberekening leven hier.",
+    description: "Kosten, factuurstroom, betalingen aan onderaannemers, saldo en winstberekening leven hier.",
     stats: [
       { label: "Totale kosten", value: "€128k" },
       { label: "Winst", value: "€34k" },
-      { label: "Gekoppelde bedrijven", value: "7" },
+      { label: "Gekoppelde onderaannemers", value: "7" },
       { label: "Open rekeningen", value: "3" },
     ],
     rulesTitle: "Financiële regels in gebruik",
@@ -68,15 +68,15 @@ const content = {
       "Financiën is de enige plek waar totale bedragen, saldo en winst leven. De projectkaart moet naar het resultaat verwijzen en het niet dupliceren.",
     focusItems: [
       "Houd financiën als enige plek voor totalen en winst.",
-      "Volg betalingen aan bedrijven via de projectkosten.",
+      "Volg betalingen aan onderaannemers via de projectkosten.",
       "Dupliceer bedragen niet in de projectkaart.",
-      "Houd factuur en meerwerk in één financiële stroom.",
+      "Houd facturen en echte kosten in één financiële stroom.",
     ],
     stepItems: [
       "Open de financiële weergave van het project.",
-      "Voeg kosten, betalingen en meerwerk toe.",
+      "Voeg kosten en betalingen toe.",
       "Controleer het huidige saldo en de winst.",
-      "Vergelijk het resultaat met de project- en bedrijfskaarten.",
+      "Vergelijk het resultaat met de project- en onderaannemerskaarten.",
     ],
     entries: [
       {
@@ -85,12 +85,12 @@ const content = {
         amount: "€68k",
       },
       {
-        label: "Meerwerk",
-        note: "Extra werk toegevoegd na de oorspronkelijke offerte.",
+        label: "Onvoorziene kosten",
+        note: "Kosten die niet in de basisberekening zaten en apart moeten worden bijgehouden.",
         amount: "€14k",
       },
       {
-        label: "Bedrijfsbetalingen",
+        label: "Betalingen aan onderaannemers",
         note: "Betalingen die via de projectkosten lopen.",
         amount: "€36k",
       },

@@ -9,7 +9,7 @@ const content = {
   ru: {
     title: "Центр управления проектом",
     description:
-      "Удобная стартовая точка для готового приложения: понятная структура, сильная навигация и отдельные зоны для клиентов, фирм, проектов, финансов, документов, календаря, отчетов и архива.",
+      "Удобная стартовая точка для готового приложения: понятная структура, сильная навигация и отдельные зоны для клиентов, субподрядчиков, проектов, финансов, документов, календаря, отчетов и архива.",
     metrics: [
       { label: "Разделов", value: "9" },
       { label: "Спек-слоев", value: "6" },
@@ -25,7 +25,7 @@ const content = {
   nl: {
     title: "Projectbeheercentrum",
     description:
-      "Een handige startpagina voor de uiteindelijke applicatie: duidelijke structuur, sterke navigatie en aparte zones voor klanten, bedrijven, projecten, financiën, documenten, agenda, rapporten en archief.",
+      "Een handige startpagina voor de uiteindelijke applicatie: duidelijke structuur, sterke navigatie en aparte zones voor klanten, onderaannemers, projecten, financiën, documenten, agenda, rapporten en archief.",
     metrics: [
       { label: "Secties", value: "9" },
       { label: "Spec-lagen", value: "6" },

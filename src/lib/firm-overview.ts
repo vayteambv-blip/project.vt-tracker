@@ -17,8 +17,8 @@ type FirmOverview = {
 const overview: Record<Locale, FirmOverview> = {
   ru: {
     firmStats: [
-      { label: "Всего фирм", value: "14" },
-      { label: "Активных фирм", value: "9" },
+      { label: "Всего субподрядчиков", value: "14" },
+      { label: "Активных субподрядчиков", value: "9" },
       { label: "Учтено рабочих", value: "27" },
       { label: "Привязано контрактов", value: "11" },
     ],
@@ -59,8 +59,8 @@ const overview: Record<Locale, FirmOverview> = {
   },
   nl: {
     firmStats: [
-      { label: "Totaal bedrijven", value: "14" },
-      { label: "Actieve bedrijven", value: "9" },
+      { label: "Totaal onderaannemers", value: "14" },
+      { label: "Actieve onderaannemers", value: "9" },
       { label: "Werknemers geregistreerd", value: "27" },
       { label: "Contracten gekoppeld", value: "11" },
     ],

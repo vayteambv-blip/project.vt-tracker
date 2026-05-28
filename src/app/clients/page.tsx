@@ -9,7 +9,7 @@ const content = {
   ru: {
     title: "Клиенты",
     description:
-      "Здесь живут частные клиенты и фирмы-заказчики. Этот раздел держит контактные данные, полноту заполнения и связанные проекты раздельно и понятно.",
+      "Здесь живут частные клиенты и клиенты-фирмы. Этот раздел держит контактные данные, полноту заполнения и связанные проекты раздельно и понятно.",
     rulesTitle: "Правила клиентов в работе",
     actionsTitle: "Основные действия",
     projectLinks: "Проекты связаны: ",
@@ -24,7 +24,7 @@ const content = {
       "Поиск должен быстро приводить к нужному клиенту.",
     ],
     actionItems: [
-      "Создать нового частного клиента или фирму-заказчика.",
+      "Создать нового частного клиента или клиента-фирму.",
       "Открыть связанные проекты из карточки клиента.",
       "Продолжить заполнение незавершенных данных позже.",
       "Держать список клиентов чистым и удобным для поиска.",
@@ -35,13 +35,13 @@ const content = {
     },
     type: {
       Private: "Частный",
-      Company: "Фирма",
+      Company: "Клиент-фирма",
     },
   },
   nl: {
     title: "Klanten",
-    description:
-      "Hier staan particuliere klanten en opdrachtgevers. Deze sectie houdt contactgegevens, volledigheid en gekoppelde projecten gescheiden en duidelijk.",
+      description:
+      "Hier staan particuliere klanten en bedrijfsklanten. Deze sectie houdt contactgegevens, volledigheid en gekoppelde projecten gescheiden en duidelijk.",
     rulesTitle: "Klantregels in gebruik",
     actionsTitle: "Belangrijkste acties",
     projectLinks: "Gekoppelde projecten: ",
@@ -56,7 +56,7 @@ const content = {
       "Zoeken moet snel naar de juiste klant leiden.",
     ],
     actionItems: [
-      "Maak een nieuwe particuliere klant of opdrachtgever aan.",
+      "Maak een nieuwe particuliere klant of bedrijfsklant aan.",
       "Open gekoppelde projecten vanuit de klantkaart.",
       "Ga later verder met onvolledige gegevens.",
       "Houd de klantenlijst schoon en makkelijk doorzoekbaar.",
@@ -67,7 +67,7 @@ const content = {
     },
     type: {
       Private: "Particulier",
-      Company: "Bedrijf",
+      Company: "Bedrijfsklant",
     },
   },
 } as const;

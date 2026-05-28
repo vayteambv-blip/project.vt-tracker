@@ -28,10 +28,10 @@ const defaultDraft: StoredFirm = {
 
 const content = {
   ru: {
-    title: "Локальное хранение фирм",
+    title: "Локальное хранение субподрядчиков",
     note:
-      "Храни черновики фирм в браузере, чтобы проверять связи, рабочих и поток оплаты без backend.",
-    nameLabel: "Название фирмы",
+      "Храни черновики субподрядчиков в браузере, чтобы проверять связи, рабочих и поток оплаты без backend.",
+    nameLabel: "Название субподрядчика",
     namePlaceholder: "Например: Кровля Плюс",
     roleLabel: "Роль",
     statusLabel: "Статус",
@@ -41,9 +41,9 @@ const content = {
     projectsPlaceholder: "Например: 4",
     paymentLabel: "Путь оплаты",
     paymentPlaceholder: "Например: Оплата через расходы проекта",
-    save: "Сохранить фирму",
-    reset: "Очистить фирмы",
-    savedCount: "Сохраненных фирм",
+    save: "Сохранить субподрядчика",
+    reset: "Очистить субподрядчиков",
+    savedCount: "Сохраненных субподрядчиков",
     storage: "Хранилище",
     storageReady: "Браузерное хранилище готово",
     lastSave: "Последнее сохранение",
@@ -52,8 +52,8 @@ const content = {
     noPayment: "Путь оплаты пока не задан.",
     noValue: "0",
     role: {
-      Executor: "Исполнитель",
-      Customer: "Заказчик",
+      Executor: "Субподрядчик",
+      Customer: "Клиент-фирма",
     },
     status: {
       Active: "Активная",
@@ -61,10 +61,10 @@ const content = {
     },
   },
   nl: {
-    title: "Lokale bedrijfsopslag",
+    title: "Lokale opslag van onderaannemers",
     note:
-      "Bewaar bedrijfsconcepten in de browser om koppelingen, werknemers en betaalstromen zonder backend te testen.",
-    nameLabel: "Bedrijfsnaam",
+      "Bewaar concepten van onderaannemers in de browser om koppelingen, werknemers en betaalstromen zonder backend te testen.",
+    nameLabel: "Naam onderaannemer",
     namePlaceholder: "Bijvoorbeeld: DakPlus",
     roleLabel: "Rol",
     statusLabel: "Status",
@@ -74,9 +74,9 @@ const content = {
     projectsPlaceholder: "Bijvoorbeeld: 4",
     paymentLabel: "Betaalpad",
     paymentPlaceholder: "Bijvoorbeeld: Betaling via projectkosten",
-    save: "Bedrijf opslaan",
-    reset: "Bedrijven wissen",
-    savedCount: "Opgeslagen bedrijven",
+    save: "Onderaannemer opslaan",
+    reset: "Onderaannemers wissen",
+    savedCount: "Opgeslagen onderaannemers",
     storage: "Opslag",
     storageReady: "Browseropslag is gereed",
     lastSave: "Laatste opslag",
@@ -85,8 +85,8 @@ const content = {
     noPayment: "Betaalpad is nog niet ingevuld.",
     noValue: "0",
     role: {
-      Executor: "Uitvoerder",
-      Customer: "Opdrachtgever",
+      Executor: "Onderaannemer",
+      Customer: "Klant-bedrijf",
     },
     status: {
       Active: "Actief",

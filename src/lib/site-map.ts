@@ -11,17 +11,17 @@ const sections: Record<Locale, SiteSection[]> = {
     {
       label: "Клиенты",
       href: "/clients",
-      summary: "Частные клиенты и фирмы-заказчики с привязкой к проектам.",
+      summary: "Частные клиенты и клиент-фирмы с привязкой к проектам.",
     },
     {
-      label: "Фирмы",
+      label: "Субподрядчики",
       href: "/firms",
-      summary: "Субподрядчики, рабочие, контракты и файлы фирмы.",
+      summary: "Субподрядчики, рабочие, контракты и файлы субподрядчика.",
     },
     {
       label: "Проекты",
       href: "/projects",
-      summary: "Основа проекта, даты старта, фирмы, документы, фото и финансы.",
+      summary: "Основа проекта, дата старта, субподрядчики, документы, фото и финансы.",
     },
     {
       label: "Календарь",
@@ -31,7 +31,7 @@ const sections: Record<Locale, SiteSection[]> = {
     {
       label: "Финансы",
       href: "/finances",
-      summary: "Расходы, фактура, прибыль и оплаты фирм.",
+      summary: "Расходы, фактура, прибыль и оплаты субподрядчикам.",
     },
     {
       label: "Документы",
@@ -46,7 +46,7 @@ const sections: Record<Locale, SiteSection[]> = {
     {
       label: "Архив",
       href: "/archive",
-      summary: "Закрытые проекты с поиском по году и клиенту.",
+      summary: "Закрытые проекты с поиском по году, месяцу, разделу и клиенту.",
     },
     {
       label: "Примерочная",
@@ -58,17 +58,17 @@ const sections: Record<Locale, SiteSection[]> = {
     {
       label: "Klanten",
       href: "/clients",
-      summary: "Particuliere klanten en opdrachtgevers die aan projecten gekoppeld zijn.",
+      summary: "Particuliere klanten en klantbedrijven die aan projecten gekoppeld zijn.",
     },
     {
-      label: "Bedrijven",
+      label: "Onderaannemers",
       href: "/firms",
-      summary: "Onderaannemers, vakmensen, contracten en bedrijfsbestanden.",
+      summary: "Onderaannemers, vakmensen, contracten en bestanden van de onderaannemer.",
     },
     {
       label: "Projecten",
       href: "/projects",
-      summary: "De kern van het project: startdata, bedrijven, documenten, foto's en financiën.",
+      summary: "De kern van het project: startdata, onderaannemers, documenten, foto's en financiën.",
     },
     {
       label: "Agenda",
@@ -78,7 +78,7 @@ const sections: Record<Locale, SiteSection[]> = {
     {
       label: "Financiën",
       href: "/finances",
-      summary: "Kosten, factuur, winst en betalingen aan bedrijven.",
+      summary: "Kosten, factuur, winst en betalingen aan onderaannemers.",
     },
     {
       label: "Documenten",
@@ -93,7 +93,7 @@ const sections: Record<Locale, SiteSection[]> = {
     {
       label: "Archief",
       href: "/archive",
-      summary: "Afgesloten projecten met zoeken op jaar en klant.",
+      summary: "Afgesloten projecten met zoeken op jaar, maand, onderdeel en klant.",
     },
     {
       label: "Proefruimte",
@@ -108,7 +108,7 @@ const flow: Record<Locale, string[]> = {
     "Создать или открыть проект.",
     "Проверить клиента, адрес, смету и контакты.",
     "Назначить дату старта и показать проект в календаре.",
-    "Добавить фирмы, документы, фото, отчеты и материалы.",
+    "Добавить субподрядчиков, документы, фото, отчеты и материалы.",
     "Отслеживать расходы и итог в финансах.",
     "Закрыть проект и при необходимости вернуть его из архива.",
     "Сравнить изменения в примерочной перед переносом на основные экраны.",
@@ -117,7 +117,7 @@ const flow: Record<Locale, string[]> = {
     "Maak een project aan of open een bestaand project.",
     "Controleer de klant, het adres, de offerte en de contactgegevens.",
     "Stel de startdatum in en toon het project in de agenda.",
-    "Voeg bedrijven, documenten, foto's, rapporten en materialen toe.",
+    "Voeg onderaannemers, documenten, foto's, rapporten en materialen toe.",
     "Volg kosten en het resultaat in de financiën.",
     "Sluit het project af en haal het indien nodig terug uit het archief.",
     "Vergelijk wijzigingen in de proefruimte voordat ze naar de hoofdschermen gaan.",

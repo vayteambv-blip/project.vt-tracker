@@ -8,7 +8,7 @@ import { useLocale } from "@/components/locale-provider";
 const content = {
   ru: {
     title: "Документы",
-    description: "Файлы проекта и фирмы с текущими версиями, архивными версиями и отправкой по email.",
+    description: "Файлы проекта и субподрядчика с актуальными версиями, архивными версиями и отправкой по email.",
     stats: [
       { label: "Текущих файлов", value: "24" },
       { label: "Архивных версий", value: "61" },
@@ -20,33 +20,33 @@ const content = {
     back: "Назад к проектам",
     compare: "Сравнить компоновку файлов в примерочной",
     note:
-      "Документы хранятся в контексте проекта или фирмы, а история версий сохраняется. Текущий файл всегда виден, а старые версии остаются как архивная история.",
+      "Документы хранятся в контексте проекта или субподрядчика, а история версий сохраняется. Актуальный файл всегда виден, а старые версии остаются как архивная история.",
     focusItems: [
-      "Разделять файлы проекта и файлы фирмы.",
-      "Показывать текущую версию и историю архива вместе.",
+      "Разделять файлы проекта и файлы субподрядчика.",
+      "Показывать актуальную версию и историю архива вместе.",
       "Разрешать открытие, скачивание, восстановление и отправку по email.",
       "Оставлять шаблоны нейтральными, чтобы они чисто начинали новый файл.",
     ],
     stepItems: [
-      "Открыть список файлов из карточки проекта или фирмы.",
-      "Проверить текущую версию и историю.",
+      "Открыть список файлов из карточки проекта или субподрядчика.",
+      "Проверить актуальную версию и историю.",
       "Отправить файл по email, если нужно.",
       "Вернуть старую версию только тогда, когда это действительно необходимо.",
     ],
     entries: [
       {
         label: "Смета проекта",
-        note: "Текущая версия плюс архивные копии.",
+        note: "Актуальная версия плюс архивные копии.",
         kind: "Файл проекта",
       },
       {
-        label: "Контракт фирмы",
-        note: "Хранится в карточке фирмы с историей версий.",
-        kind: "Файл фирмы",
+        label: "Контракт субподрядчика",
+        note: "Хранится в карточке субподрядчика с историей версий.",
+        kind: "Файл субподрядчика",
       },
       {
         label: "Пакет фактуры",
-        note: "Общая связка проекта и фирмы через финансовый поток.",
+        note: "Общая связка проекта и субподрядчиков через финансовый поток.",
         kind: "Связанный документ",
       },
     ],
@@ -54,7 +54,7 @@ const content = {
   nl: {
     title: "Documenten",
     description:
-      "Project- en bedrijfsbestanden met actuele versies, archiefversies en verzending via e-mail.",
+      "Project- en onderaannemersbestanden met actuele versies, archiefversies en verzending via e-mail.",
     stats: [
       { label: "Actuele bestanden", value: "24" },
       { label: "Archiefversies", value: "61" },
@@ -66,15 +66,15 @@ const content = {
     back: "Terug naar projecten",
     compare: "Vergelijk bestandsindeling in de proefruimte",
     note:
-      "Documenten leven binnen de context van project of bedrijf, en de versiegeschiedenis blijft bewaard. Het actuele bestand blijft zichtbaar, terwijl oude versies als archief blijven bestaan.",
+      "Documenten leven binnen de context van project of onderaannemer, en de versiegeschiedenis blijft bewaard. Het actuele bestand blijft zichtbaar, terwijl oude versies als archief blijven bestaan.",
     focusItems: [
-      "Scheid projectbestanden van bedrijfsbestanden.",
+      "Scheid projectbestanden van onderaannemersbestanden.",
       "Toon de actuele versie en de archiefgeschiedenis samen.",
       "Sta openen, downloaden, herstellen en e-mailen toe.",
       "Houd sjablonen neutraal zodat ze een nieuw bestand schoon starten.",
     ],
     stepItems: [
-      "Open de bestandslijst vanuit de project- of bedrijfskaart.",
+      "Open de bestandslijst vanuit de project- of onderaannemerskaart.",
       "Controleer de actuele versie en de geschiedenis.",
       "Verstuur het bestand via e-mail indien nodig.",
       "Herstel een oude versie alleen wanneer het echt nodig is.",
@@ -86,13 +86,13 @@ const content = {
         kind: "Projectbestand",
       },
       {
-        label: "Bedrijfscontract",
-        note: "Wordt bewaard in de bedrijfskaart met versiegeschiedenis.",
-        kind: "Bedrijfsbestand",
+        label: "Onderaannemerscontract",
+        note: "Wordt bewaard in de kaart van de onderaannemer met versiegeschiedenis.",
+        kind: "Onderaannemersbestand",
       },
       {
         label: "Factuurpakket",
-        note: "Een gezamenlijke koppeling van project en bedrijf via de financiële stroom.",
+        note: "Een gezamenlijke koppeling van project en onderaannemer via de financiële stroom.",
         kind: "Gekoppeld document",
       },
     ],

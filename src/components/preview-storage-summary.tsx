@@ -6,7 +6,7 @@ import { useLocale } from "@/components/locale-provider";
 const STORAGE_KEYS = [
   { key: "vt-tracker:projects", ru: "Проекты", nl: "Projecten" },
   { key: "vt-tracker:clients", ru: "Клиенты", nl: "Klanten" },
-  { key: "vt-tracker:firms", ru: "Фирмы", nl: "Bedrijven" },
+  { key: "vt-tracker:firms", ru: "Субподрядчики", nl: "Onderaannemers" },
   { key: "vt-tracker:calendar", ru: "Календарь", nl: "Agenda" },
   { key: "vt-tracker:finances", ru: "Финансы", nl: "Financiën" },
   { key: "vt-tracker:documents", ru: "Документы", nl: "Documenten" },

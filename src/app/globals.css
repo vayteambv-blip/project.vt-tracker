@@ -356,6 +356,13 @@ a {
   margin-top: 18px;
 }
 
+.archive-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
 .field {
   display: grid;
   gap: 8px;
@@ -419,6 +426,15 @@ a {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   margin-top: 22px;
+}
+
+.archive-status {
+  margin-top: 18px;
+}
+
+.archive-empty {
+  display: grid;
+  align-content: start;
 }
 
 .draft-status > div {

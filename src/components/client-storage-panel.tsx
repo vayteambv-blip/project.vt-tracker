@@ -57,7 +57,7 @@ const content = {
     noValue: "Не задан",
     type: {
       Private: "Частный",
-      Company: "Фирма",
+      Company: "Клиент-фирма",
     },
     status: {
       Complete: "Полный",
@@ -92,7 +92,7 @@ const content = {
     noValue: "Niet ingevuld",
     type: {
       Private: "Particulier",
-      Company: "Bedrijf",
+      Company: "Bedrijfsklant",
     },
     status: {
       Complete: "Volledig",

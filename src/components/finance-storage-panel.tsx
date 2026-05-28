@@ -8,7 +8,7 @@ type StoredFinance = {
   project: string;
   totalCost: string;
   profit: string;
-  firm: string;
+  subcontractor: string;
   note: string;
   updatedAt: string;
 };
@@ -19,7 +19,7 @@ const defaultDraft: StoredFinance = {
   project: "",
   totalCost: "",
   profit: "",
-  firm: "",
+  subcontractor: "",
   note: "",
   updatedAt: "",
 };
@@ -31,7 +31,7 @@ const content = {
       "Храни финансовые черновики в браузере, чтобы проверять итоги и прибыль без backend.",
     projectLabel: "Проект",
     projectPlaceholder: "Например: Ремонт северной крыши",
-    firmLabel: "Фирма",
+    firmLabel: "Субподрядчик",
     firmPlaceholder: "Например: Кровля Плюс",
     totalLabel: "Общие расходы",
     totalPlaceholder: "Например: €128k",
@@ -51,7 +51,7 @@ const content = {
     noValue: "Не задана",
     line: "финансовая строка",
     projectTag: "Финансы",
-    firmTag: "фирма",
+    firmTag: "субподрядчик",
   },
   nl: {
     title: "Lokale financiële opslag",
@@ -59,7 +59,7 @@ const content = {
       "Bewaar financiële concepten in de browser om totalen en winst te testen zonder backend.",
     projectLabel: "Project",
     projectPlaceholder: "Bijvoorbeeld: Renovatie van het noordelijke dak",
-    firmLabel: "Bedrijf",
+    firmLabel: "Onderaannemer",
     firmPlaceholder: "Bijvoorbeeld: DakPlus",
     totalLabel: "Totale kosten",
     totalPlaceholder: "Bijvoorbeeld: €128k",
@@ -79,7 +79,7 @@ const content = {
     noValue: "Niet ingevuld",
     line: "financiële regel",
     projectTag: "Financiën",
-    firmTag: "bedrijf",
+    firmTag: "onderaannemer",
   },
 } as const;
 
@@ -131,9 +131,9 @@ export function FinanceStoragePanel() {
         <label className="field">
           <span>{copy.firmLabel}</span>
           <input
-            value={draft.firm}
+            value={draft.subcontractor}
             onChange={(event) =>
-              setDraft((current) => ({ ...current, firm: event.target.value }))
+              setDraft((current) => ({ ...current, subcontractor: event.target.value }))
             }
             placeholder={copy.firmPlaceholder}
           />
@@ -203,7 +203,7 @@ export function FinanceStoragePanel() {
           <article className="project-card" key={`${item.project}-${item.updatedAt}`}>
             <div className="project-topline">
               <span className="status status-current">{item.totalCost || copy.projectTag}</span>
-              <span className="direction">{item.firm || copy.firmTag}</span>
+              <span className="direction">{item.subcontractor || copy.firmTag}</span>
             </div>
             <h3>{item.project || copy.noTitle}</h3>
             <p className="project-note">{item.note || copy.noNotes}</p>

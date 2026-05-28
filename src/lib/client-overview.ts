@@ -20,7 +20,7 @@ const overview: Record<Locale, ClientOverview> = {
     clientStats: [
       { label: "Всего клиентов", value: "18" },
       { label: "Частные клиенты", value: "11" },
-      { label: "Фирмы-заказчики", value: "7" },
+      { label: "Клиенты-фирмы", value: "7" },
       { label: "Требуют проверки", value: "3" },
     ],
     clientCards: [

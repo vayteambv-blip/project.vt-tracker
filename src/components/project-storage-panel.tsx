@@ -9,7 +9,7 @@ type StoredProject = {
   client: string;
   direction: string;
   startDate: string;
-  status: "Preparation" | "Current" | "Future" | "Archive";
+  status: "Draft" | "Ready" | "Active" | "Archive";
   note: string;
   updatedAt: string;
 };
@@ -21,15 +21,15 @@ const defaultDraft: StoredProject = {
   client: "",
   direction: "",
   startDate: "",
-  status: "Preparation",
+  status: "Draft",
   note: "",
   updatedAt: "",
 };
 
 const statusLabel: Record<StoredProject["status"], Record<"ru" | "nl", string>> = {
-  Preparation: { ru: "Подготовка", nl: "Voorbereiding" },
-  Current: { ru: "Текущий", nl: "Actief" },
-  Future: { ru: "Будущий", nl: "Toekomstig" },
+  Draft: { ru: "Черновик", nl: "Concept" },
+  Ready: { ru: "Готовые к запуску", nl: "Klaar om te starten" },
+  Active: { ru: "Активный", nl: "Actief" },
   Archive: { ru: "Архив", nl: "Archief" },
 };
 
@@ -185,9 +185,9 @@ export function ProjectStoragePanel() {
               }))
             }
           >
-            <option value="Preparation">{statusLabel.Preparation[locale]}</option>
-            <option value="Current">{statusLabel.Current[locale]}</option>
-            <option value="Future">{statusLabel.Future[locale]}</option>
+            <option value="Draft">{statusLabel.Draft[locale]}</option>
+            <option value="Ready">{statusLabel.Ready[locale]}</option>
+            <option value="Active">{statusLabel.Active[locale]}</option>
             <option value="Archive">{statusLabel.Archive[locale]}</option>
           </select>
         </label>

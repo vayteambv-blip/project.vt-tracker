@@ -3,10 +3,10 @@ import type { Locale } from "@/lib/locale";
 export type ProjectCard = {
   name: string;
   direction: string;
-  status: "Preparation" | "Current" | "Future" | "Archive";
+  status: "Draft" | "Ready" | "Active" | "Archive";
   client: string;
   startDate: string;
-  firms: string[];
+  subcontractors: string[];
   note: string;
 };
 
@@ -28,28 +28,28 @@ const overview: Record<Locale, ProjectOverview> = {
       {
         name: "Ремонт северной крыши",
         direction: "Крыша",
-        status: "Current",
+        status: "Active",
         client: "Семья Брауэрс",
         startDate: "27.05.2026",
-        firms: ["Кровля Плюс", "Северный лес"],
+        subcontractors: ["Кровля Плюс", "Северный лес"],
         note: "Дата старта синхронизирована с календарем, открыт отчет о ходе работ.",
       },
       {
         name: "Ремонт фасада в Брюсселе",
         direction: "Фасад",
-        status: "Preparation",
+        status: "Ready",
         client: "Van Dijk Properties",
         startDate: "В ожидании",
-        firms: ["Стальной фикс", "СкайЛифт"],
+        subcontractors: ["Стальной фикс", "СкайЛифт"],
         note: "Смета одобрена, ждем финальную дату старта.",
       },
       {
         name: "Отделка лофта",
         direction: "Интерьер",
-        status: "Future",
+        status: "Draft",
         client: "Резиденция Мертенс",
         startDate: "12.06.2026",
-        firms: ["Городской мастер"],
+        subcontractors: ["Городской мастер"],
         note: "Список материалов и архив документов уже привязаны.",
       },
       {
@@ -58,13 +58,13 @@ const overview: Record<Locale, ProjectOverview> = {
         status: "Archive",
         client: "Группа Де Смет",
         startDate: "Закрыт",
-        firms: ["Каркас", "Бетон Плюс"],
+        subcontractors: ["Каркас", "Бетон Плюс"],
         note: "Заархивирован как полностью закрытый проект с сохраненной историей версий.",
       },
     ],
     projectFlowSteps: [
       "Создать проект и проверить основные данные.",
-      "Привязать клиента, фирму, даты и смету.",
+      "Привязать клиента, субподрядчиков, даты и смету.",
       "Синхронизировать дату старта с календарем.",
       "Добавить документы, фото, отчеты и материалы.",
       "Сохранять расходы и итог в финансах проекта.",
@@ -82,28 +82,28 @@ const overview: Record<Locale, ProjectOverview> = {
       {
         name: "Renovatie van het noordelijke dak",
         direction: "Dak",
-        status: "Current",
+        status: "Active",
         client: "Familie Brouwers",
         startDate: "27-05-2026",
-        firms: ["DakPlus", "Noord Hout"],
+        subcontractors: ["DakPlus", "Noord Hout"],
         note: "De startdatum is gesynchroniseerd met de agenda en het voortgangsrapport is geopend.",
       },
       {
         name: "Gevelherstel in Brussel",
         direction: "Gevel",
-        status: "Preparation",
+        status: "Ready",
         client: "Van Dijk Properties",
         startDate: "In afwachting",
-        firms: ["StaalFix", "LuchtLift"],
+        subcontractors: ["StaalFix", "LuchtLift"],
         note: "De offerte is goedgekeurd; we wachten op de definitieve startdatum.",
       },
       {
         name: "Loftafwerking",
         direction: "Interieur",
-        status: "Future",
+        status: "Draft",
         client: "Mertens Residentie",
         startDate: "12-06-2026",
-        firms: ["Stedelijk Vakwerk"],
+        subcontractors: ["Stedelijk Vakwerk"],
         note: "De materiaallijst en het documentarchief zijn al gekoppeld.",
       },
       {
@@ -112,13 +112,13 @@ const overview: Record<Locale, ProjectOverview> = {
         status: "Archive",
         client: "De Smet Groep",
         startDate: "Gesloten",
-        firms: ["Raamwerk", "BetonPlus"],
+        subcontractors: ["Raamwerk", "BetonPlus"],
         note: "Gearchiveerd als volledig afgerond project met bewaarde versiegeschiedenis.",
       },
     ],
     projectFlowSteps: [
       "Maak een project aan en controleer de basisgegevens.",
-      "Koppel klant, bedrijf, data en offerte.",
+      "Koppel klant, onderaannemers, data en offerte.",
       "Synchroniseer de startdatum met de agenda.",
       "Voeg documenten, foto's, rapporten en materialen toe.",
       "Bewaar kosten en het resultaat in de projectfinanciën.",

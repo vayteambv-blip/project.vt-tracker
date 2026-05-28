@@ -6,7 +6,7 @@ import { clearStorage, readStorage, writeStorage } from "@/lib/storage";
 
 type StoredDocument = {
   title: string;
-  scope: "Project" | "Firm" | "Linked";
+  scope: "Project" | "Subcontractor" | "Linked";
   version: string;
   note: string;
   updatedAt: string;
@@ -24,7 +24,7 @@ const defaultDraft: StoredDocument = {
 
 const scopeLabel: Record<StoredDocument["scope"], Record<"ru" | "nl", string>> = {
   Project: { ru: "Проект", nl: "Project" },
-  Firm: { ru: "Фирма", nl: "Bedrijf" },
+  Subcontractor: { ru: "Субподрядчик", nl: "Onderaannemer" },
   Linked: { ru: "Связанный", nl: "Gekoppeld" },
 };
 
@@ -136,7 +136,7 @@ export function DocumentStoragePanel() {
             }
           >
             <option value="Project">{scopeLabel.Project[locale]}</option>
-            <option value="Firm">{scopeLabel.Firm[locale]}</option>
+            <option value="Subcontractor">{scopeLabel.Subcontractor[locale]}</option>
             <option value="Linked">{scopeLabel.Linked[locale]}</option>
           </select>
         </label>

@@ -10,7 +10,7 @@ const content = {
   ru: {
     title: "Проекты",
     description:
-      "Центральная рабочая единица приложения. Этот раздел держит один проект привязанным к одному направлению и связывает его с клиентом, фирмами, датой старта, документами, отчетами, финансами и архивом.",
+      "Центральная рабочая единица приложения. Этот раздел держит один проект привязанным к одному направлению и связывает его с клиентом, субподрядчиками, датой старта, документами, отчетами, финансами и архивом.",
     flowTitle: "Поток проекта",
     focusTitle: "Что этот экран всегда должен показывать",
     stateTag: "Рабочее состояние",
@@ -23,32 +23,42 @@ const content = {
       "Используй отдельную примерочную страницу, чтобы сначала проверить изменения и только потом переносить одобренный результат на основные экраны проекта.",
     actionsTitle: "Приоритеты проекта",
     phasesTitle: "Фазы проекта",
+    financeTitle: "Финансы в проекте",
+    financeText:
+      "Здесь видно, какие расходы уже связаны с проектом. Полный финансовый раздел остается отдельным, но доступен из этой карточки.",
     projectLinks: "Проект:",
     client: "Клиент",
     start: "Start",
-    firms: "Фирмы",
+    firms: "Субподрядчики",
+    financeLink: "Открыть финансы",
+    financeRows: [
+      "Материалы",
+      "Оплата субподрядчикам",
+      "Аренда техники",
+      "Непредвиденные расходы",
+    ],
     status: {
-      Preparation: "Подготовка",
-      Current: "Текущий",
-      Future: "Будущий",
+      Draft: "Черновик",
+      Ready: "Готовые к запуску",
+      Active: "Активный",
       Archive: "Архив",
     },
     checkItems: [
       "Проект должен пройти проверку полноты перед сохранением.",
-      "Клиент, фирмы, файлы и финансы должны быть видны в одном месте.",
+      "Клиент, субподрядчики, файлы и финансы должны быть видны в одном месте.",
       "Завершенный проект можно перенести в архив вручную.",
       "Архивный проект можно вернуть как тот же самый проект с новой датой старта.",
     ],
     actions: [
       "Открыть проект и проверить полноту перед сохранением.",
-      "Видеть клиента, фирмы, файлы и финансы в одном месте.",
+      "Видеть клиента, субподрядчиков, файлы и финансы в одном месте.",
       "Переносить завершенный проект в архив вручную.",
       "Возвращать архивный проект как тот же самый проект с новой датой старта.",
     ],
     phases: [
-      "Подготовка: смета, клиент и дата еще уточняются.",
-      "Текущий: активная работа с привязанными фирмами, документами и финансами.",
-      "Будущий: запланированный проект, который ждет свою дату старта.",
+      "Черновик: проект еще собирается и ждет полноты данных.",
+      "Готовые к запуску: проект уже подтвержден и ожидает старт.",
+      "Активный: дата старта наступила и работа идет.",
       "Архив: завершенный проект с сохраненной историей.",
     ],
     openPreview: "Открыть примерочную",
@@ -56,7 +66,7 @@ const content = {
   nl: {
     title: "Projecten",
     description:
-      "De centrale werkeenheid van de applicatie. Deze sectie houdt één project gekoppeld aan één richting en verbindt het met klant, bedrijven, startdatum, documenten, rapporten, financiën en archief.",
+      "De centrale werkeenheid van de applicatie. Deze sectie houdt één project gekoppeld aan één richting en verbindt het met klant, onderaannemers, startdatum, documenten, rapporten, financiën en archief.",
     flowTitle: "Projectstroom",
     focusTitle: "Wat dit scherm altijd moet tonen",
     stateTag: "Werkstatus",
@@ -69,32 +79,42 @@ const content = {
       "Gebruik de aparte proefruimte om eerst wijzigingen te testen en pas daarna het goedgekeurde resultaat naar de hoofdschermen te brengen.",
     actionsTitle: "Projectprioriteiten",
     phasesTitle: "Projectfases",
+    financeTitle: "Financiën in het project",
+    financeText:
+      "Hier zie je welke kosten al aan het project zijn gekoppeld. De volledige financiële sectie blijft apart, maar is vanuit deze kaart bereikbaar.",
     projectLinks: "Project:",
     client: "Klant",
     start: "Старт",
-    firms: "Bedrijven",
+    firms: "Onderaannemers",
+    financeLink: "Open financiën",
+    financeRows: [
+      "Materialen",
+      "Betalingen aan onderaannemers",
+      "Huur van materieel",
+      "Onvoorziene kosten",
+    ],
     status: {
-      Preparation: "Voorbereiding",
-      Current: "Actief",
-      Future: "Toekomstig",
+      Draft: "Concept",
+      Ready: "Klaar om te starten",
+      Active: "Actief",
       Archive: "Archief",
     },
     checkItems: [
       "Het project moet volledig worden gecontroleerd vóór opslaan.",
-      "Klant, bedrijven, bestanden en financiën moeten op één plek zichtbaar zijn.",
+      "Klant, onderaannemers, bestanden en financiën moeten op één plek zichtbaar zijn.",
       "Een afgerond project kan handmatig naar het archief worden verplaatst.",
       "Een gearchiveerd project kan terugkomen als hetzelfde project met een nieuwe startdatum.",
     ],
     actions: [
       "Open het project en controleer de volledigheid vóór het opslaan.",
-      "Bekijk klant, bedrijven, bestanden en financiën op één plek.",
+      "Bekijk klant, onderaannemers, bestanden en financiën op één plek.",
       "Verplaats een afgerond project handmatig naar het archief.",
       "Breng een gearchiveerd project terug als hetzelfde project met een nieuwe startdatum.",
     ],
     phases: [
-      "Voorbereiding: offerte, klant en datum worden nog afgerond.",
-      "Actief: lopend werk met gekoppelde bedrijven, documenten en financiën.",
-      "Toekomstig: gepland project dat op zijn startdatum wacht.",
+      "Concept: het project wordt nog opgebouwd en wacht op volledige gegevens.",
+      "Klaar om te starten: het project is bevestigd en wacht op de start.",
+      "Actief: de startdatum is bereikt en het werk loopt.",
       "Archief: afgerond project met bewaarde geschiedenis.",
     ],
     openPreview: "Open proefruimte",
@@ -179,6 +199,23 @@ export default function ProjectsPage() {
           </article>
         </section>
 
+        <section className="panel-grid">
+          <article className="panel">
+            <h2>{copy.financeTitle}</h2>
+            <p className="entity-note">{copy.financeText}</p>
+            <ul className="check-list">
+              {copy.financeRows.map((row) => (
+                <li key={row}>{row}</li>
+              ))}
+            </ul>
+            <div className="panel-actions">
+              <Link className="ghost-link" href="/finances">
+                {copy.financeLink}
+              </Link>
+            </div>
+          </article>
+        </section>
+
         <ProjectStoragePanel />
 
         <section className="project-grid">
@@ -202,7 +239,7 @@ export default function ProjectsPage() {
                 </div>
                 <div>
                   <dt>{copy.firms}</dt>
-                  <dd>{project.firms.join(", ")}</dd>
+                <dd>{project.subcontractors.join(", ")}</dd>
                 </div>
               </dl>
             </article>
@@ -221,12 +258,12 @@ export default function ProjectsPage() {
 
 function projectStatusTone(status: ProjectStatus) {
   switch (status) {
-    case "Preparation":
+    case "Draft":
       return "status-prep";
-    case "Current":
-      return "status-current";
-    case "Future":
+    case "Ready":
       return "status-future";
+    case "Active":
+      return "status-current";
     case "Archive":
       return "status-archive";
     default:

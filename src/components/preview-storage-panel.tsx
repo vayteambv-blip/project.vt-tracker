@@ -7,7 +7,7 @@ import { clearStorage, readStorage, writeStorage } from "@/lib/storage";
 type PreviewDraft = {
   title: string;
   notes: string;
-  lane: "Current" | "Variant" | "Approved";
+  lane: "Draft" | "Approved";
   updatedAt: string;
 };
 
@@ -16,13 +16,12 @@ const STORAGE_KEY = "vt-tracker:preview-draft";
 const defaultDraft: PreviewDraft = {
   title: "",
   notes: "",
-  lane: "Variant",
+  lane: "Draft",
   updatedAt: "",
 };
 
 const laneLabel: Record<PreviewDraft["lane"], Record<"ru" | "nl", string>> = {
-  Current: { ru: "Текущая", nl: "Actueel" },
-  Variant: { ru: "Вариант", nl: "Variant" },
+  Draft: { ru: "Черновик", nl: "Concept" },
   Approved: { ru: "Одобренная", nl: "Goedgekeurd" },
 };
 
@@ -42,7 +41,7 @@ const content = {
     storageReady: "Браузерное хранилище готово",
     lastSave: "Последнее сохранение",
     notSaved: "Еще не сохранялось",
-    currentLane: "Текущая линия",
+    currentLane: "Линия черновика",
   },
   nl: {
     title: "Concept in browseropslag",
@@ -59,7 +58,7 @@ const content = {
     storageReady: "Browseropslag is gereed",
     lastSave: "Laatste opslag",
     notSaved: "Nog niet opgeslagen",
-    currentLane: "Huidige lijn",
+    currentLane: "Conceptlijn",
   },
 } as const;
 
@@ -111,8 +110,7 @@ export function PreviewStoragePanel() {
               }))
             }
           >
-            <option value="Current">{laneLabel.Current[locale]}</option>
-            <option value="Variant">{laneLabel.Variant[locale]}</option>
+            <option value="Draft">{laneLabel.Draft[locale]}</option>
             <option value="Approved">{laneLabel.Approved[locale]}</option>
           </select>
         </label>

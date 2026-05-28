@@ -59,9 +59,9 @@ const content = {
         note: "Черновики клиентов, полнота, контакты и связанные проекты.",
       },
       {
-        title: "3. Фирмы",
+        title: "3. Субподрядчики",
         href: "/firms",
-        note: "Черновики фирм, рабочие, роли и оплата через расходы проекта.",
+        note: "Черновики субподрядчиков, рабочие, роли и оплата через расходы проекта.",
       },
       {
         title: "4. Календарь",
@@ -71,7 +71,7 @@ const content = {
       {
         title: "5. Финансы",
         href: "/finances",
-        note: "Расходы, прибыль и связанный поток оплат фирм.",
+        note: "Расходы, прибыль и связанный поток оплат субподрядчикам.",
       },
       {
         title: "6. Документы",
@@ -142,9 +142,9 @@ const content = {
         note: "Klantconcepten, volledigheid, contactgegevens en gekoppelde projecten.",
       },
       {
-        title: "3. Bedrijven",
+        title: "3. Onderaannemers",
         href: "/firms",
-        note: "Bedrijfconcepten, werknemers, rollen en betaling via projectkosten.",
+        note: "Concepten voor onderaannemers, werknemers, rollen en betaling via projectkosten.",
       },
       {
         title: "4. Agenda",
@@ -154,7 +154,7 @@ const content = {
       {
         title: "5. Financiën",
         href: "/finances",
-        note: "Kosten, winst en de gekoppelde betaalstroom van bedrijven.",
+        note: "Kosten, winst en de gekoppelde betaalstroom van onderaannemers.",
       },
       {
         title: "6. Documenten",

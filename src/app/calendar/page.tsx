@@ -24,17 +24,17 @@ const content = {
       {
         day: "Сегодня",
         name: "Ремонт северной крыши",
-        note: "Текущий проект с синхронизированной датой старта и готовым отчетом.",
+        note: "Активный проект с синхронизированной датой старта и готовым отчетом.",
       },
       {
         day: "Завтра",
         name: "Ремонт фасада в Брюсселе",
-        note: "Дата старта еще ждет финального подтверждения.",
+        note: "Проект уже готов к запуску и ждет наступления стартовой даты.",
       },
       {
         day: "На следующей неделе",
         name: "Отделка лофта",
-        note: "Планируемый проект, который ждет активной фазы.",
+        note: "Проект с выбранной датой старта, который уже виден в календаре.",
       },
     ],
     focusItems: [
@@ -69,17 +69,17 @@ const content = {
       {
         day: "Vandaag",
         name: "Renovatie van het noordelijke dak",
-        note: "Lopend project met gesynchroniseerde startdatum en klaar voortgangsrapport.",
+        note: "Actief project met gesynchroniseerde startdatum en klaar voortgangsrapport.",
       },
       {
         day: "Morgen",
         name: "Gevelherstel in Brussel",
-        note: "De startdatum wacht nog op de definitieve bevestiging.",
+        note: "De startdatum is al gekozen en wacht op de start.",
       },
       {
         day: "Volgende week",
         name: "Loftafwerking",
-        note: "Gepland project dat wacht op de actieve fase.",
+        note: "Het project is zichtbaar in de agenda na het kiezen van de startdatum.",
       },
     ],
     focusItems: [

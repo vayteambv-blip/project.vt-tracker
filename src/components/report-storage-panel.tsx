@@ -2,18 +2,23 @@
 
 import { useState } from "react";
 import { useLocale } from "@/components/locale-provider";
-import { clearStorage, readStorage, writeStorage } from "@/lib/storage";
+import {
+  clearWorkspaceSlice,
+  createWorkspaceId,
+  updateWorkspaceSlice,
+  useWorkspaceSelector,
+} from "@/lib/workspace-store";
 
 type StoredReport = {
+  id?: string;
   title: string;
   photoCount: string;
   note: string;
   updatedAt: string;
 };
 
-const STORAGE_KEY = "vt-tracker:reports";
-
 const defaultDraft: StoredReport = {
+  id: undefined,
   title: "",
   photoCount: "",
   note: "",
@@ -67,31 +72,38 @@ const content = {
   },
 } as const;
 
-function readItems(): StoredReport[] {
-  return readStorage<StoredReport[]>(STORAGE_KEY, []);
-}
-
-function saveItems(items: StoredReport[]): void {
-  writeStorage(STORAGE_KEY, items);
-}
-
 export function ReportStoragePanel() {
   const { locale } = useLocale();
   const copy = content[locale];
   const [draft, setDraft] = useState<StoredReport>(defaultDraft);
-  const [items, setItems] = useState<StoredReport[]>(() => readItems());
+  const items = useWorkspaceSelector((workspace) => workspace.reports);
 
   const handleSave = () => {
-    const nextItem = { ...draft, updatedAt: new Date().toLocaleString(locale === "ru" ? "ru-RU" : "nl-NL") };
-    const nextItems = [nextItem, ...items];
-    setItems(nextItems);
-    saveItems(nextItems);
+    const nextItem = {
+      ...draft,
+      id: draft.id || createWorkspaceId("report"),
+      updatedAt: new Date().toLocaleString(locale === "ru" ? "ru-RU" : "nl-NL"),
+    };
+    updateWorkspaceSlice("reports", (current) => {
+      const withoutCurrent = current.filter((item) => item.id !== nextItem.id);
+      return [nextItem, ...withoutCurrent];
+    });
     setDraft(defaultDraft);
   };
 
+  const handleEdit = (item: StoredReport) => {
+    setDraft(item);
+  };
+
+  const handleDelete = (id: string) => {
+    updateWorkspaceSlice("reports", (current) => current.filter((item) => item.id !== id));
+    if (draft.id === id) {
+      setDraft(defaultDraft);
+    }
+  };
+
   const handleReset = () => {
-    clearStorage(STORAGE_KEY);
-    setItems([]);
+    clearWorkspaceSlice("reports");
     setDraft(defaultDraft);
   };
 
@@ -162,13 +174,21 @@ export function ReportStoragePanel() {
 
       <section className="project-grid project-storage-grid">
         {items.map((item) => (
-          <article className="project-card" key={`${item.title}-${item.updatedAt}`}>
+          <article className="project-card" key={item.id}>
             <div className="project-topline">
               <span className="status status-current">{copy.report}</span>
               <span className="direction">{item.photoCount || "0"} {copy.photoSuffix}</span>
             </div>
             <h3>{item.title || copy.noTitle}</h3>
             <p className="project-note">{item.note || copy.noNotes}</p>
+            <div className="panel-actions">
+              <button className="ghost-button" type="button" onClick={() => handleEdit(item)}>
+                {locale === "ru" ? "Редактировать" : "Bewerken"}
+              </button>
+              <button className="ghost-button" type="button" onClick={() => handleDelete(item.id)}>
+                {locale === "ru" ? "Удалить" : "Verwijderen"}
+              </button>
+            </div>
           </article>
         ))}
       </section>

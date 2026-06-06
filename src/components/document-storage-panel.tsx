@@ -2,9 +2,15 @@
 
 import { useState } from "react";
 import { useLocale } from "@/components/locale-provider";
-import { clearStorage, readStorage, writeStorage } from "@/lib/storage";
+import {
+  clearWorkspaceSlice,
+  createWorkspaceId,
+  updateWorkspaceSlice,
+  useWorkspaceSelector,
+} from "@/lib/workspace-store";
 
 type StoredDocument = {
+  id?: string;
   title: string;
   scope: "Project" | "Subcontractor" | "Linked";
   version: string;
@@ -12,9 +18,8 @@ type StoredDocument = {
   updatedAt: string;
 };
 
-const STORAGE_KEY = "vt-tracker:documents";
-
 const defaultDraft: StoredDocument = {
+  id: undefined,
   title: "",
   scope: "Project",
   version: "",
@@ -32,7 +37,7 @@ const content = {
   ru: {
     title: "Локальное хранение документов",
     note:
-      "Храни черновики документов в браузере, чтобы проверять версии и разделение контекста без backend.",
+      "Храни записи документов в браузере, чтобы проверять разделение контекста без backend.",
     titleLabel: "Название документа",
     titlePlaceholder: "Например: Смета проекта",
     scopeLabel: "Контекст",
@@ -56,7 +61,7 @@ const content = {
   nl: {
     title: "Lokale documentopslag",
     note:
-      "Bewaar documentconcepten in de browser om versies en contextscheiding zonder backend te testen.",
+      "Bewaar documentregels in de browser om contextscheiding zonder backend te testen.",
     titleLabel: "Documentnaam",
     titlePlaceholder: "Bijvoorbeeld: Projectofferte",
     scopeLabel: "Context",
@@ -79,31 +84,38 @@ const content = {
   },
 } as const;
 
-function readItems(): StoredDocument[] {
-  return readStorage<StoredDocument[]>(STORAGE_KEY, []);
-}
-
-function saveItems(items: StoredDocument[]): void {
-  writeStorage(STORAGE_KEY, items);
-}
-
 export function DocumentStoragePanel() {
   const { locale } = useLocale();
   const copy = content[locale];
   const [draft, setDraft] = useState<StoredDocument>(defaultDraft);
-  const [items, setItems] = useState<StoredDocument[]>(() => readItems());
+  const items = useWorkspaceSelector((workspace) => workspace.documents);
 
   const handleSave = () => {
-    const nextItem = { ...draft, updatedAt: new Date().toLocaleString(locale === "ru" ? "ru-RU" : "nl-NL") };
-    const nextItems = [nextItem, ...items];
-    setItems(nextItems);
-    saveItems(nextItems);
+    const nextItem = {
+      ...draft,
+      id: draft.id || createWorkspaceId("document"),
+      updatedAt: new Date().toLocaleString(locale === "ru" ? "ru-RU" : "nl-NL"),
+    };
+    updateWorkspaceSlice("documents", (current) => {
+      const withoutCurrent = current.filter((item) => item.id !== nextItem.id);
+      return [nextItem, ...withoutCurrent];
+    });
     setDraft(defaultDraft);
   };
 
+  const handleEdit = (item: StoredDocument) => {
+    setDraft(item);
+  };
+
+  const handleDelete = (id: string) => {
+    updateWorkspaceSlice("documents", (current) => current.filter((item) => item.id !== id));
+    if (draft.id === id) {
+      setDraft(defaultDraft);
+    }
+  };
+
   const handleReset = () => {
-    clearStorage(STORAGE_KEY);
-    setItems([]);
+    clearWorkspaceSlice("documents");
     setDraft(defaultDraft);
   };
 
@@ -191,7 +203,7 @@ export function DocumentStoragePanel() {
 
       <section className="project-grid project-storage-grid">
         {items.map((item) => (
-          <article className="project-card" key={`${item.title}-${item.updatedAt}`}>
+          <article className="project-card" key={item.id}>
             <div className="project-topline">
               <span className="status status-current">{scopeLabel[item.scope][locale]}</span>
               <span className="direction">{copy.document}</span>
@@ -204,6 +216,14 @@ export function DocumentStoragePanel() {
                 <dd>{item.version || copy.noVersion}</dd>
               </div>
             </dl>
+            <div className="panel-actions">
+              <button className="ghost-button" type="button" onClick={() => handleEdit(item)}>
+                {locale === "ru" ? "Редактировать" : "Bewerken"}
+              </button>
+              <button className="ghost-button" type="button" onClick={() => handleDelete(item.id)}>
+                {locale === "ru" ? "Удалить" : "Verwijderen"}
+              </button>
+            </div>
           </article>
         ))}
       </section>

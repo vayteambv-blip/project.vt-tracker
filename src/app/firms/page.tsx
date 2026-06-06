@@ -9,11 +9,11 @@ const content = {
   ru: {
     title: "Субподрядчики",
     description:
-      "Здесь живут субподрядчики с рабочими, контрактами, ролями в проекте и оплатой через финансы проекта.",
+      "Здесь живут субподрядчики с рабочими, ролями в проекте, числом проектов и оплатой через финансы проекта.",
     ruleTitle: "Правила субподрядчиков в работе",
     actionTitle: "Основные действия",
     workers: "Рабочие",
-    projects: "Фактуры",
+    projects: "Проекты",
     status: {
       Active: "Активная",
       Linked: "Привязана",
@@ -25,24 +25,24 @@ const content = {
     ruleItems: [
       "Субподрядчик не хранит отдельный финансовый блок.",
       "Роль субподрядчика задается внутри проекта, а не отдельно.",
-      "Рабочие, контракты и файлы живут в карточке субподрядчика.",
+      "Рабочие, число проектов и путь оплаты живут в карточке субподрядчика.",
       "Поиск по субподрядчикам должен оставаться быстрым и понятным.",
     ],
     actionItems: [
       "Создать нового субподрядчика и назначить роль.",
       "Открыть проекты, где субподрядчик уже участвует.",
-      "Проверить текущие контракты и рабочие записи.",
+      "Проверить текущие рабочие записи и путь оплаты.",
       "Смотреть оплату только через расходы проекта.",
     ],
   },
   nl: {
     title: "Onderaannemers",
     description:
-      "Hier staan onderaannemers met vakmensen, contracten, projectrollen en betaling via de projectfinanciën.",
+      "Hier staan onderaannemers met vakmensen, projectrollen, aantal projecten en betaling via de projectfinanciën.",
     ruleTitle: "Regels voor onderaannemers",
     actionTitle: "Belangrijkste acties",
     workers: "Werknemers",
-    projects: "Facturen",
+    projects: "Projecten",
     status: {
       Active: "Actief",
       Linked: "Gekoppeld",
@@ -54,13 +54,13 @@ const content = {
     ruleItems: [
       "Een onderaannemer heeft geen aparte financiële sectie.",
       "De rol van de onderaannemer wordt binnen het project bepaald.",
-      "Werknemers, contracten en bestanden leven in de kaart van de onderaannemer.",
+      "Werknemers, aantal projecten en betaalpad leven in de kaart van de onderaannemer.",
       "Zoeken op onderaannemers moet snel en duidelijk blijven.",
     ],
     actionItems: [
       "Maak een nieuwe onderaannemer aan en wijs een rol toe.",
       "Open projecten waaraan de onderaannemer al meedoet.",
-      "Controleer lopende contracten en werknemers.",
+      "Controleer lopende werknemers en het betaalpad.",
       "Bekijk betalingen alleen via de projectkosten.",
     ],
   },
@@ -84,26 +84,6 @@ export default function FirmsPage() {
             </article>
           ))}
         </div>
-
-        <section className="panel-grid">
-          <article className="panel">
-            <h2>{copy.ruleTitle}</h2>
-            <ul className="bullet-list">
-              {copy.ruleItems.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
-
-          <article className="panel">
-            <h2>{copy.actionTitle}</h2>
-            <ul className="check-list">
-              {copy.actionItems.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
-        </section>
 
         <section className="entity-grid">
           {overview.firmCards.map((firm) => (

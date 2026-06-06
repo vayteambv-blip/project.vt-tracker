@@ -1,4 +1,5 @@
 import type { Locale } from "@/lib/locale";
+import { getWorkspaceSnapshot } from "@/lib/workspace-store";
 
 export type FirmCard = {
   name: string;
@@ -14,94 +15,40 @@ type FirmOverview = {
   firmCards: FirmCard[];
 };
 
-const overview: Record<Locale, FirmOverview> = {
-  ru: {
-    firmStats: [
-      { label: "Всего субподрядчиков", value: "14" },
-      { label: "Активных субподрядчиков", value: "9" },
-      { label: "Учтено рабочих", value: "27" },
-      { label: "Привязано контрактов", value: "11" },
-    ],
-    firmCards: [
-      {
-        name: "Кровля Плюс",
-        role: "Executor",
-        status: "Active",
-        workers: 6,
-        projects: 4,
-        paymentPath: "Оплата проходит через расходы проекта",
-      },
-      {
-        name: "Подъем-Скай",
-        role: "Executor",
-        status: "Linked",
-        workers: 3,
-        projects: 2,
-        paymentPath: "Привязана к одному текущему проекту",
-      },
-      {
-        name: "Городской мастер",
-        role: "Executor",
-        status: "Active",
-        workers: 5,
-        projects: 3,
-        paymentPath: "Оплата проходит через расходы проекта",
-      },
-      {
-        name: "КаркасПлюс",
-        role: "Customer",
-        status: "Active",
-        workers: 4,
-        projects: 1,
-        paymentPath: "Использует поток расходов проекта",
-      },
-    ],
-  },
-  nl: {
-    firmStats: [
-      { label: "Totaal onderaannemers", value: "14" },
-      { label: "Actieve onderaannemers", value: "9" },
-      { label: "Werknemers geregistreerd", value: "27" },
-      { label: "Contracten gekoppeld", value: "11" },
-    ],
-    firmCards: [
-      {
-        name: "DakPlus",
-        role: "Executor",
-        status: "Active",
-        workers: 6,
-        projects: 4,
-        paymentPath: "Betaling loopt via de projectkosten",
-      },
-      {
-        name: "LuchtLift",
-        role: "Executor",
-        status: "Linked",
-        workers: 3,
-        projects: 2,
-        paymentPath: "Gekoppeld aan één lopend project",
-      },
-      {
-        name: "Stedelijk Vakwerk",
-        role: "Executor",
-        status: "Active",
-        workers: 5,
-        projects: 3,
-        paymentPath: "Betaling loopt via de projectkosten",
-      },
-      {
-        name: "Raamwerk",
-        role: "Customer",
-        status: "Active",
-        workers: 4,
-        projects: 1,
-        paymentPath: "Gebruikt de kostenstroom van het project",
-      },
-    ],
-  },
-};
-
 export function getFirmOverview(locale: Locale): FirmOverview {
-  return overview[locale];
-}
+  const firms = getWorkspaceSnapshot().firms;
 
+  const firmCards = firms.map((firm) => ({
+    name: firm.name,
+    role: firm.role,
+    status: firm.status,
+    workers: Number(firm.workers || 0),
+    projects: Number(firm.projects || 0),
+    paymentPath: firm.paymentPath,
+  }));
+
+  const totals = {
+    all: firms.length,
+    active: firms.filter((firm) => firm.status === "Active").length,
+    workers: firms.reduce((sum, firm) => sum + Number(firm.workers || 0), 0),
+    linked: firms.filter((firm) => firm.status === "Linked").length,
+  };
+
+  return {
+    firmStats:
+      locale === "ru"
+        ? [
+            { label: "Всего субподрядчиков", value: String(totals.all) },
+            { label: "Активных субподрядчиков", value: String(totals.active) },
+            { label: "Учтено рабочих", value: String(totals.workers) },
+            { label: "Привязано записей", value: String(totals.linked) },
+          ]
+        : [
+            { label: "Totaal onderaannemers", value: String(totals.all) },
+            { label: "Actieve onderaannemers", value: String(totals.active) },
+            { label: "Werknemers geregistreerd", value: String(totals.workers) },
+            { label: "Gekoppelde regels", value: String(totals.linked) },
+          ],
+    firmCards,
+  };
+}

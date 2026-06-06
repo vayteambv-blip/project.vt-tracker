@@ -140,63 +140,13 @@ export default function ProjectsPage() {
           ))}
         </div>
 
-        <section className="panel-grid">
-          <article className="panel">
-            <h2>{copy.flowTitle}</h2>
-            <ol className="bullet-list">
-              {overview.projectFlowSteps.map((step) => (
-                <li key={step}>{step}</li>
-              ))}
-            </ol>
-          </article>
-
-          <article className="panel">
-            <h2>{copy.focusTitle}</h2>
-            <ul className="check-list">
-              {copy.checkItems.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
-        </section>
-
-        <section className="feature-grid">
-          <article className="feature-card">
-            <div className="tag">{copy.stateTag}</div>
-            <h3>{copy.stateTitle}</h3>
-            <p>{copy.stateText}</p>
-          </article>
-
-          <article className="feature-card">
-            <div className="tag">{copy.previewTag}</div>
-            <h3>{copy.previewTitle}</h3>
-            <p>{copy.previewText}</p>
-            <div className="panel-actions">
-              <Link className="ghost-link" href="/preview">
-                {copy.openPreview}
-              </Link>
-            </div>
-          </article>
-        </section>
-
-        <section className="panel-grid">
-          <article className="panel">
-            <h2>{copy.actionsTitle}</h2>
-            <ul className="check-list">
-              {copy.actions.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
-
-          <article className="panel">
-            <h2>{copy.phasesTitle}</h2>
-            <ul className="bullet-list">
-              {copy.phases.map((phase) => (
-                <li key={phase}>{phase}</li>
-              ))}
-            </ul>
-          </article>
+        <section className="panel">
+          <h2>{copy.flowTitle}</h2>
+          <ol className="bullet-list">
+            {overview.projectFlowSteps.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
+          </ol>
         </section>
 
         <section className="panel-grid">
@@ -246,11 +196,6 @@ export default function ProjectsPage() {
           ))}
         </section>
 
-        <p className="shell-note">
-          {locale === "ru"
-            ? "Экран проекта — это опорная точка всего приложения: если он выстроен правильно, остальные разделы можно держать в общей логике."
-            : "Het projectscherm is de ankerpunt van de hele applicatie: als dit goed staat, kunnen de andere secties in dezelfde logica blijven."}
-        </p>
       </section>
     </AppShell>
   );

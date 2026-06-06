@@ -240,6 +240,31 @@ a {
   padding: 22px;
 }
 
+.client-kind-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 22px 0;
+}
+
+.client-kind-card {
+  width: 100%;
+  text-align: left;
+  appearance: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.client-kind-card .metric {
+  margin-top: 4px;
+}
+
+.client-kind-card.is-active {
+  border-color: rgba(110, 211, 200, 0.42);
+  box-shadow: 0 16px 32px rgba(11, 18, 32, 0.18);
+  transform: translateY(-1px);
+}
+
 .summary-card .metric {
   font-size: 1.6rem;
   font-weight: 700;

@@ -1,13 +1,13 @@
 import type { Locale } from "@/lib/locale";
+import { getWorkspaceSnapshot } from "@/lib/workspace-store";
 
 export type ClientCard = {
+  kind: "Private" | "Business";
   name: string;
-  type: "Private" | "Company";
-  status: "Complete" | "In progress";
+  surname?: string;
   address: string;
   phone: string;
   email: string;
-  projects: number;
 };
 
 type ClientOverview = {
@@ -15,101 +15,49 @@ type ClientOverview = {
   clientCards: ClientCard[];
 };
 
-const overview: Record<Locale, ClientOverview> = {
-  ru: {
-    clientStats: [
-      { label: "Всего клиентов", value: "18" },
-      { label: "Частные клиенты", value: "11" },
-      { label: "Клиенты-фирмы", value: "7" },
-      { label: "Требуют проверки", value: "3" },
-    ],
-    clientCards: [
-      {
-        name: "Семья Брауэрс",
-        type: "Private",
-        status: "Complete",
-        address: "Антверпен, Бельгия",
-        phone: "+32 470 11 22 33",
-        email: "brouwers@example.com",
-        projects: 2,
-      },
-      {
-        name: "Ван Дейк Недвижимость",
-        type: "Company",
-        status: "In progress",
-        address: "Гент, Бельгия",
-        phone: "+32 470 44 55 66",
-        email: "contact@vandijkproperties.be",
-        projects: 4,
-      },
-      {
-        name: "Резиденция Мертенс",
-        type: "Private",
-        status: "Complete",
-        address: "Брюгге, Бельгия",
-        phone: "+32 470 77 88 99",
-        email: "mertens@example.com",
-        projects: 1,
-      },
-      {
-        name: "Группа Де Смет",
-        type: "Company",
-        status: "In progress",
-        address: "Лёвен, Бельгия",
-        phone: "+32 470 12 34 56",
-        email: "office@desmetgroup.be",
-        projects: 3,
-      },
-    ],
-  },
-  nl: {
-    clientStats: [
-      { label: "Totaal klanten", value: "18" },
-      { label: "Particuliere klanten", value: "11" },
-      { label: "Opdrachtgevers", value: "7" },
-      { label: "Te controleren", value: "3" },
-    ],
-    clientCards: [
-      {
-        name: "Familie Brouwers",
-        type: "Private",
-        status: "Complete",
-        address: "Antwerpen, België",
-        phone: "+32 470 11 22 33",
-        email: "brouwers@example.com",
-        projects: 2,
-      },
-      {
-        name: "Van Dijk Vastgoed",
-        type: "Company",
-        status: "In progress",
-        address: "Gent, België",
-        phone: "+32 470 44 55 66",
-        email: "contact@vandijkproperties.be",
-        projects: 4,
-      },
-      {
-        name: "Mertens Residentie",
-        type: "Private",
-        status: "Complete",
-        address: "Brugge, België",
-        phone: "+32 470 77 88 99",
-        email: "mertens@example.com",
-        projects: 1,
-      },
-      {
-        name: "De Smet Groep",
-        type: "Company",
-        status: "In progress",
-        address: "Leuven, België",
-        phone: "+32 470 12 34 56",
-        email: "office@desmetgroup.be",
-        projects: 3,
-      },
-    ],
-  },
-};
+function resolveClientKind(client: { kind?: "Private" | "Business"; surname?: string; taxNumber?: string }): "Private" | "Business" {
+  if (client.kind) {
+    return client.kind;
+  }
+
+  if (client.taxNumber?.trim()) {
+    return "Business";
+  }
+
+  return client.surname?.trim() ? "Private" : "Business";
+}
 
 export function getClientOverview(locale: Locale): ClientOverview {
-  return overview[locale];
+  const clients = getWorkspaceSnapshot().clients;
+
+  const clientCards = clients.map((client) => ({
+    kind: resolveClientKind(client),
+    name: client.name,
+    surname: client.surname,
+    address: client.address,
+    phone: client.phone,
+    email: client.email,
+  }));
+
+  const totals = {
+    all: clients.length,
+    private: clients.filter((client) => resolveClientKind(client) === "Private").length,
+    business: clients.filter((client) => resolveClientKind(client) === "Business").length,
+  };
+
+  return {
+    clientStats:
+      locale === "ru"
+        ? [
+            { label: "Всего клиентов", value: String(totals.all) },
+            { label: "Частные клиенты", value: String(totals.private) },
+            { label: "Клиенты-предприниматели", value: String(totals.business) },
+          ]
+        : [
+            { label: "Totaal klanten", value: String(totals.all) },
+            { label: "Particuliere klanten", value: String(totals.private) },
+            { label: "Zakelijke klanten", value: String(totals.business) },
+          ],
+    clientCards,
+  };
 }

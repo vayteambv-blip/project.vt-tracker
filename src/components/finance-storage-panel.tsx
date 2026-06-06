@@ -2,9 +2,15 @@
 
 import { useState } from "react";
 import { useLocale } from "@/components/locale-provider";
-import { clearStorage, readStorage, writeStorage } from "@/lib/storage";
+import {
+  clearWorkspaceSlice,
+  createWorkspaceId,
+  updateWorkspaceSlice,
+  useWorkspaceSelector,
+} from "@/lib/workspace-store";
 
 type StoredFinance = {
+  id?: string;
   project: string;
   totalCost: string;
   profit: string;
@@ -13,9 +19,8 @@ type StoredFinance = {
   updatedAt: string;
 };
 
-const STORAGE_KEY = "vt-tracker:finances";
-
 const defaultDraft: StoredFinance = {
+  id: undefined,
   project: "",
   totalCost: "",
   profit: "",
@@ -83,31 +88,38 @@ const content = {
   },
 } as const;
 
-function readItems(): StoredFinance[] {
-  return readStorage<StoredFinance[]>(STORAGE_KEY, []);
-}
-
-function saveItems(items: StoredFinance[]): void {
-  writeStorage(STORAGE_KEY, items);
-}
-
 export function FinanceStoragePanel() {
   const { locale } = useLocale();
   const copy = content[locale];
   const [draft, setDraft] = useState<StoredFinance>(defaultDraft);
-  const [items, setItems] = useState<StoredFinance[]>(() => readItems());
+  const items = useWorkspaceSelector((workspace) => workspace.finances);
 
   const handleSave = () => {
-    const nextItem = { ...draft, updatedAt: new Date().toLocaleString(locale === "ru" ? "ru-RU" : "nl-NL") };
-    const nextItems = [nextItem, ...items];
-    setItems(nextItems);
-    saveItems(nextItems);
+    const nextItem = {
+      ...draft,
+      id: draft.id || createWorkspaceId("finance"),
+      updatedAt: new Date().toLocaleString(locale === "ru" ? "ru-RU" : "nl-NL"),
+    };
+    updateWorkspaceSlice("finances", (current) => {
+      const withoutCurrent = current.filter((item) => item.id !== nextItem.id);
+      return [nextItem, ...withoutCurrent];
+    });
     setDraft(defaultDraft);
   };
 
+  const handleEdit = (item: StoredFinance) => {
+    setDraft(item);
+  };
+
+  const handleDelete = (id: string) => {
+    updateWorkspaceSlice("finances", (current) => current.filter((item) => item.id !== id));
+    if (draft.id === id) {
+      setDraft(defaultDraft);
+    }
+  };
+
   const handleReset = () => {
-    clearStorage(STORAGE_KEY);
-    setItems([]);
+    clearWorkspaceSlice("finances");
     setDraft(defaultDraft);
   };
 
@@ -200,7 +212,7 @@ export function FinanceStoragePanel() {
 
       <section className="project-grid project-storage-grid">
         {items.map((item) => (
-          <article className="project-card" key={`${item.project}-${item.updatedAt}`}>
+          <article className="project-card" key={item.id}>
             <div className="project-topline">
               <span className="status status-current">{item.totalCost || copy.projectTag}</span>
               <span className="direction">{item.subcontractor || copy.firmTag}</span>
@@ -213,6 +225,14 @@ export function FinanceStoragePanel() {
                 <dd>{item.profit || copy.noValue}</dd>
               </div>
             </dl>
+            <div className="panel-actions">
+              <button className="ghost-button" type="button" onClick={() => handleEdit(item)}>
+                {locale === "ru" ? "Редактировать" : "Bewerken"}
+              </button>
+              <button className="ghost-button" type="button" onClick={() => handleDelete(item.id)}>
+                {locale === "ru" ? "Удалить" : "Verwijderen"}
+              </button>
+            </div>
           </article>
         ))}
       </section>

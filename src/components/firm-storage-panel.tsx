@@ -2,9 +2,15 @@
 
 import { useState } from "react";
 import { useLocale } from "@/components/locale-provider";
-import { clearStorage, readStorage, writeStorage } from "@/lib/storage";
+import {
+  clearWorkspaceSlice,
+  createWorkspaceId,
+  updateWorkspaceSlice,
+  useWorkspaceSelector,
+} from "@/lib/workspace-store";
 
 type StoredFirm = {
+  id?: string;
   name: string;
   role: "Executor" | "Customer";
   status: "Active" | "Linked";
@@ -14,9 +20,8 @@ type StoredFirm = {
   updatedAt: string;
 };
 
-const STORAGE_KEY = "vt-tracker:firms";
-
 const defaultDraft: StoredFirm = {
+  id: undefined,
   name: "",
   role: "Executor",
   status: "Active",
@@ -95,35 +100,39 @@ const content = {
   },
 } as const;
 
-function readFirms(): StoredFirm[] {
-  return readStorage<StoredFirm[]>(STORAGE_KEY, []);
-}
-
-function saveFirms(firms: StoredFirm[]): void {
-  writeStorage(STORAGE_KEY, firms);
-}
-
 export function FirmStoragePanel() {
   const { locale } = useLocale();
   const copy = content[locale];
   const [draft, setDraft] = useState<StoredFirm>(defaultDraft);
-  const [firms, setFirms] = useState<StoredFirm[]>(() => readFirms());
+  const firms = useWorkspaceSelector((workspace) => workspace.firms);
 
   const handleSave = () => {
     const nextFirm = {
       ...draft,
+      id: draft.id || createWorkspaceId("firm"),
       updatedAt: new Date().toLocaleString(locale === "ru" ? "ru-RU" : "nl-NL"),
     };
 
-    const nextFirms = [nextFirm, ...firms];
-    setFirms(nextFirms);
-    saveFirms(nextFirms);
+    updateWorkspaceSlice("firms", (current) => {
+      const withoutCurrent = current.filter((firm) => firm.id !== nextFirm.id);
+      return [nextFirm, ...withoutCurrent];
+    });
     setDraft(defaultDraft);
   };
 
+  const handleEdit = (firm: StoredFirm) => {
+    setDraft(firm);
+  };
+
+  const handleDelete = (id: string) => {
+    updateWorkspaceSlice("firms", (current) => current.filter((firm) => firm.id !== id));
+    if (draft.id === id) {
+      setDraft(defaultDraft);
+    }
+  };
+
   const handleReset = () => {
-    clearStorage(STORAGE_KEY);
-    setFirms([]);
+    clearWorkspaceSlice("firms");
     setDraft(defaultDraft);
   };
 
@@ -214,7 +223,7 @@ export function FirmStoragePanel() {
 
       <div className="panel-actions">
         <button className="solid-button" type="button" onClick={handleSave}>
-          {copy.save}
+          {draft.id ? locale === "ru" ? "Обновить субподрядчика" : "Onderaannemer bijwerken" : copy.save}
         </button>
         <button className="ghost-button" type="button" onClick={handleReset}>
           {copy.reset}
@@ -238,7 +247,7 @@ export function FirmStoragePanel() {
 
       <section className="entity-grid">
         {firms.map((firm) => (
-          <article className="entity-card" key={`${firm.name}-${firm.updatedAt}`}>
+          <article className="entity-card" key={firm.id}>
             <div className="entity-topline">
               <span className={firm.status === "Active" ? "status status-current" : "status status-future"}>
                 {copy.status[firm.status]}
@@ -257,6 +266,14 @@ export function FirmStoragePanel() {
                 <dd>{firm.projects || copy.noValue}</dd>
               </div>
             </dl>
+            <div className="panel-actions">
+              <button className="ghost-button" type="button" onClick={() => handleEdit(firm)}>
+                {locale === "ru" ? "Редактировать" : "Bewerken"}
+              </button>
+              <button className="ghost-button" type="button" onClick={() => handleDelete(firm.id)}>
+                {locale === "ru" ? "Удалить" : "Verwijderen"}
+              </button>
+            </div>
           </article>
         ))}
       </section>

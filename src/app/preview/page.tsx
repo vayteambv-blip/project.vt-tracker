@@ -193,51 +193,6 @@ export default function PreviewPage() {
           ))}
         </div>
 
-        <section className="panel-grid">
-          <article className="panel preview-panel">
-            <div className="eyebrow">{locale === "ru" ? "Отдельная рабочая зона" : "Aparte werkzone"}</div>
-            <h2>{copy.panelTitle}</h2>
-            <p className="entity-note">{copy.panelText}</p>
-            <div className="panel-actions">
-              <Link className="ghost-link" href="/">
-                {copy.compare}
-              </Link>
-              <Link className="ghost-link" href="/projects">
-                {copy.openProjects}
-              </Link>
-            </div>
-          </article>
-
-          <article className="panel">
-            <h2>{copy.testTitle}</h2>
-            <ol className="bullet-list">
-              {copy.steps.map((step) => (
-                <li key={step}>{step}</li>
-              ))}
-            </ol>
-          </article>
-        </section>
-
-        <section className="panel-grid">
-          <article className="panel">
-            <h2>{copy.rulesTitle}</h2>
-            <ul className="check-list">
-              {copy.rules.map((rule) => (
-                <li key={rule}>{rule}</li>
-              ))}
-            </ul>
-          </article>
-
-          <article className="panel">
-            <h2>{copy.separateTitle}</h2>
-            <ul className="check-list">
-              {copy.separate.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
-        </section>
-
         <PreviewStorageSummary />
         <PreviewStoragePanel />
 
@@ -265,6 +220,12 @@ export default function PreviewPage() {
         <section className="panel">
           <h2>{copy.quickTitle}</h2>
           <div className="panel-actions preview-links">
+            <Link className="ghost-link" href="/">
+              {copy.compare}
+            </Link>
+            <Link className="ghost-link" href="/projects">
+              {copy.openProjects}
+            </Link>
             {sections.map((section) => (
               <Link key={section.href} className="ghost-link" href={section.href}>
                 {section.label}
@@ -272,12 +233,6 @@ export default function PreviewPage() {
             ))}
           </div>
         </section>
-
-        <p className="shell-note">
-          {locale === "ru"
-            ? "Эта страница — образцовая комната, где можно проверить весь фронтенд перед сравнением с основными экранами проекта."
-            : "Deze pagina is de referentieruimte waar je de hele frontend kunt controleren vóór je hem vergelijkt met de hoofdschermen van het project."}
-        </p>
       </section>
     </AppShell>
   );

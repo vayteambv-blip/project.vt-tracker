@@ -2,54 +2,31 @@
 
 import { useEffect, useState } from "react";
 import { useLocale } from "@/components/locale-provider";
+import { buildCalendarItemsFromProjects, useWorkspaceSelector } from "@/lib/workspace-store";
 
-const STORAGE_KEYS = [
-  { key: "vt-tracker:projects", ru: "Проекты", nl: "Projecten" },
-  { key: "vt-tracker:clients", ru: "Клиенты", nl: "Klanten" },
-  { key: "vt-tracker:firms", ru: "Субподрядчики", nl: "Onderaannemers" },
-  { key: "vt-tracker:calendar", ru: "Календарь", nl: "Agenda" },
-  { key: "vt-tracker:finances", ru: "Финансы", nl: "Financiën" },
-  { key: "vt-tracker:documents", ru: "Документы", nl: "Documenten" },
-  { key: "vt-tracker:reports", ru: "Отчеты", nl: "Rapporten" },
-  { key: "vt-tracker:archive", ru: "Архив", nl: "Archief" },
-  { key: "vt-tracker:preview-draft", ru: "Черновик примерочной", nl: "Proefruimteconcept" },
-] as const;
+const PREVIEW_DRAFT_KEY = "vt-tracker:preview-draft";
 
-type StorageState = {
-  key: string;
-  label: string;
-  count: number;
-};
-
-function countItems(key: string): number {
+function countPreviewDraft(): number {
   if (typeof window === "undefined") {
     return 0;
   }
 
   try {
-    const raw = window.localStorage.getItem(key);
+    const raw = window.localStorage.getItem(PREVIEW_DRAFT_KEY);
     if (!raw) {
       return 0;
     }
 
-    const parsed = JSON.parse(raw) as unknown;
-    return Array.isArray(parsed) ? parsed.length : 1;
+    return JSON.parse(raw) ? 1 : 0;
   } catch {
     return 0;
   }
 }
 
-function readSnapshot(locale: "ru" | "nl"): StorageState[] {
-  return STORAGE_KEYS.map((entry) => ({
-    key: entry.key,
-    label: locale === "ru" ? entry.ru : entry.nl,
-    count: countItems(entry.key),
-  }));
-}
-
 export function PreviewStorageSummary() {
   const { locale } = useLocale();
   const [, forceRefresh] = useState(0);
+  const workspace = useWorkspaceSelector((snapshot) => snapshot);
 
   useEffect(() => {
     const sync = () => {
@@ -58,37 +35,81 @@ export function PreviewStorageSummary() {
 
     window.addEventListener("storage", sync);
     window.addEventListener("vt-tracker-storage-change", sync);
+    window.addEventListener("vt-tracker-workspace-change", sync);
 
     return () => {
       window.removeEventListener("storage", sync);
       window.removeEventListener("vt-tracker-storage-change", sync);
+      window.removeEventListener("vt-tracker-workspace-change", sync);
     };
   }, [locale]);
 
-  const items = readSnapshot(locale);
+  const items = [
+    {
+      key: "clients",
+      label: locale === "ru" ? "Клиенты" : "Klanten",
+      count: workspace.clients.length,
+    },
+    {
+      key: "firms",
+      label: locale === "ru" ? "Субподрядчики" : "Onderaannemers",
+      count: workspace.firms.length,
+    },
+    {
+      key: "projects",
+      label: locale === "ru" ? "Проекты" : "Projecten",
+      count: workspace.projects.length,
+    },
+    {
+      key: "calendar",
+      label: locale === "ru" ? "Календарь" : "Agenda",
+      count: buildCalendarItemsFromProjects(workspace.projects, workspace.calendar).length,
+    },
+    {
+      key: "finances",
+      label: locale === "ru" ? "Финансы" : "Financiën",
+      count: workspace.finances.length,
+    },
+    {
+      key: "documents",
+      label: locale === "ru" ? "Документы" : "Documenten",
+      count: workspace.documents.length,
+    },
+    {
+      key: "reports",
+      label: locale === "ru" ? "Отчёты" : "Rapporten",
+      count: workspace.reports.length,
+    },
+    {
+      key: "archive",
+      label: locale === "ru" ? "Архив" : "Archief",
+      count: workspace.archive.length,
+    },
+  ];
   const total = items.reduce((sum, item) => sum + item.count, 0);
+  const previewDraftCount = countPreviewDraft();
 
   return (
     <section className="panel">
       <h2>{locale === "ru" ? "Сводка хранилища" : "Opslagsoverzicht"}</h2>
       <p className="entity-note">
         {locale === "ru"
-          ? "Этот блок показывает, что уже хранится в браузере по каждой зоне. Так можно проверять фронтенд без backend."
-          : "Dit blok toont wat er al in de browser per zone is opgeslagen. Zo kun je de frontend testen zonder backend."}
+          ? "Этот блок показывает, что уже хранится в общем workspace-хранилище по каждой зоне. Так можно проверять фронтенд без backend."
+          : "Dit blok toont wat al in het gezamenlijke workspace-opslag is bewaard. Zo kun je de frontend testen zonder backend."}
       </p>
 
       <div className="draft-status">
         <div>
           <span className="label">{locale === "ru" ? "Отслеживаемых зон" : "Bijgehouden zones"}</span>
-          <div className="metric">{STORAGE_KEYS.length}</div>
+          <div className="metric">{items.length}</div>
         </div>
         <div>
           <span className="label">{locale === "ru" ? "Всего сохранено" : "Totaal opgeslagen"}</span>
           <div className="metric">{total}</div>
         </div>
         <div>
-          <span className="label">{locale === "ru" ? "Тип хранилища" : "Opslagtype"}</span>
-          <div className="metric">Browser localStorage</div>
+          <span className="label">{locale === "ru" ? "Черновик превью" : "Proefruimteconcept"}</span>
+          <div className="metric">{previewDraftCount}</div>
         </div>
       </div>
 

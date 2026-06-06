@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { AppShell } from "@/components/app-shell";
 import { DocumentStoragePanel } from "@/components/document-storage-panel";
 import { useLocale } from "@/components/locale-provider";
@@ -8,92 +7,55 @@ import { useLocale } from "@/components/locale-provider";
 const content = {
   ru: {
     title: "Документы",
-    description: "Файлы проекта и субподрядчика с актуальными версиями, архивными версиями и отправкой по email.",
+    description: "Текущие записи документов проекта, субподрядчика и связанных файлов.",
     stats: [
-      { label: "Текущих файлов", value: "24" },
-      { label: "Архивных версий", value: "61" },
-      { label: "Отправок по email", value: "12" },
-      { label: "Шаблонов", value: "9" },
-    ],
-    rulesTitle: "Правила документов в работе",
-    stepsTitle: "Следующие шаги разработки",
-    back: "Назад к проектам",
-    compare: "Сравнить компоновку файлов в примерочной",
-    note:
-      "Документы хранятся в контексте проекта или субподрядчика, а история версий сохраняется. Актуальный файл всегда виден, а старые версии остаются как архивная история.",
-    focusItems: [
-      "Разделять файлы проекта и файлы субподрядчика.",
-      "Показывать актуальную версию и историю архива вместе.",
-      "Разрешать открытие, скачивание, восстановление и отправку по email.",
-      "Оставлять шаблоны нейтральными, чтобы они чисто начинали новый файл.",
-    ],
-    stepItems: [
-      "Открыть список файлов из карточки проекта или субподрядчика.",
-      "Проверить актуальную версию и историю.",
-      "Отправить файл по email, если нужно.",
-      "Вернуть старую версию только тогда, когда это действительно необходимо.",
+      { label: "Записей", value: "24" },
+      { label: "Контекстов", value: "3" },
+      { label: "Поля записи", value: "4" },
+      { label: "Черновиков", value: "0" },
     ],
     entries: [
       {
         label: "Смета проекта",
-        note: "Актуальная версия плюс архивные копии.",
+        note: "Запись с контекстом проекта и номером версии.",
         kind: "Файл проекта",
       },
       {
-        label: "Контракт субподрядчика",
-        note: "Хранится в карточке субподрядчика с историей версий.",
+        label: "Запись субподрядчика",
+        note: "Запись с контекстом субподрядчика и заметкой.",
         kind: "Файл субподрядчика",
       },
       {
-        label: "Пакет фактуры",
-        note: "Общая связка проекта и субподрядчиков через финансовый поток.",
-        kind: "Связанный документ",
+        label: "Связанная запись",
+        note: "Отдельный контекст для связанных документов.",
+        kind: "Связанный файл",
       },
     ],
   },
   nl: {
     title: "Documenten",
-    description:
-      "Project- en onderaannemersbestanden met actuele versies, archiefversies en verzending via e-mail.",
+    description: "Actuele documentregels voor projecten, onderaannemers en gekoppelde bestanden.",
     stats: [
-      { label: "Actuele bestanden", value: "24" },
-      { label: "Archiefversies", value: "61" },
-      { label: "E-mail verzonden", value: "12" },
-      { label: "Sjablonen", value: "9" },
-    ],
-    rulesTitle: "Documentregels in gebruik",
-    stepsTitle: "Volgende ontwikkelstappen",
-    back: "Terug naar projecten",
-    compare: "Vergelijk bestandsindeling in de proefruimte",
-    note:
-      "Documenten leven binnen de context van project of onderaannemer, en de versiegeschiedenis blijft bewaard. Het actuele bestand blijft zichtbaar, terwijl oude versies als archief blijven bestaan.",
-    focusItems: [
-      "Scheid projectbestanden van onderaannemersbestanden.",
-      "Toon de actuele versie en de archiefgeschiedenis samen.",
-      "Sta openen, downloaden, herstellen en e-mailen toe.",
-      "Houd sjablonen neutraal zodat ze een nieuw bestand schoon starten.",
-    ],
-    stepItems: [
-      "Open de bestandslijst vanuit de project- of onderaannemerskaart.",
-      "Controleer de actuele versie en de geschiedenis.",
-      "Verstuur het bestand via e-mail indien nodig.",
-      "Herstel een oude versie alleen wanneer het echt nodig is.",
+      { label: "Regels", value: "24" },
+      { label: "Contexten", value: "3" },
+      { label: "Velden per regel", value: "4" },
+      { label: "Concepten", value: "0" },
     ],
     entries: [
       {
         label: "Projectofferte",
-        note: "Actuele versie plus archiefkopieën.",
+        note: "Een regel met projectcontext en versienummer.",
         kind: "Projectbestand",
       },
       {
-        label: "Onderaannemerscontract",
-        note: "Wordt bewaard in de kaart van de onderaannemer met versiegeschiedenis.",
+        label: "Onderaannemersregel",
+        note: "Een regel met context van de onderaannemer en notitie.",
         kind: "Onderaannemersbestand",
       },
       {
-        label: "Factuurpakket",
-        note: "Een gezamenlijke koppeling van project en onderaannemer via de financiële stroom.",
-        kind: "Gekoppeld document",
+        label: "Gekoppelde regel",
+        note: "Een aparte context voor gekoppelde documenten.",
+        kind: "Gekoppeld bestand",
       },
     ],
   },
@@ -115,31 +77,6 @@ export default function DocumentsPage() {
           ))}
         </div>
 
-        <section className="panel-grid">
-          <article className="panel">
-            <h2>{copy.rulesTitle}</h2>
-            <ul className="check-list">
-              {copy.focusItems.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
-
-          <article className="panel">
-            <h2>{copy.stepsTitle}</h2>
-            <ol className="bullet-list">
-              {copy.stepItems.map((step) => (
-                <li key={step}>{step}</li>
-              ))}
-            </ol>
-            <div className="panel-actions">
-              <Link className="ghost-link" href="/preview">
-                {copy.compare}
-              </Link>
-            </div>
-          </article>
-        </section>
-
         <section className="project-grid">
           {copy.entries.map((entry) => (
             <article className="project-card" key={entry.label}>
@@ -151,16 +88,6 @@ export default function DocumentsPage() {
               <p className="project-note">{entry.note}</p>
             </article>
           ))}
-        </section>
-
-        <section className="panel">
-          <h2>{locale === "ru" ? "Связь документов" : "Documentkoppeling"}</h2>
-          <p className="entity-note">{copy.note}</p>
-          <div className="panel-actions">
-            <Link className="ghost-link" href="/projects">
-              {copy.back}
-            </Link>
-          </div>
         </section>
 
         <DocumentStoragePanel />

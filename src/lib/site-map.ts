@@ -16,7 +16,7 @@ const sections: Record<Locale, SiteSection[]> = {
     {
       label: "Субподрядчики",
       href: "/firms",
-      summary: "Субподрядчики, рабочие, контракты и файлы субподрядчика.",
+      summary: "Субподрядчики, рабочие, проекты и путь оплаты.",
     },
     {
       label: "Проекты",
@@ -31,12 +31,12 @@ const sections: Record<Locale, SiteSection[]> = {
     {
       label: "Финансы",
       href: "/finances",
-      summary: "Расходы, фактура, прибыль и оплаты субподрядчикам.",
+      summary: "Расходы, прибыль и оплаты субподрядчикам.",
     },
     {
       label: "Документы",
       href: "/documents",
-      summary: "Текущие файлы, архивные версии и шаблоны.",
+      summary: "Текущие записи документов по проекту, субподрядчику и связи.",
     },
     {
       label: "Отчеты",
@@ -63,7 +63,7 @@ const sections: Record<Locale, SiteSection[]> = {
     {
       label: "Onderaannemers",
       href: "/firms",
-      summary: "Onderaannemers, vakmensen, contracten en bestanden van de onderaannemer.",
+      summary: "Onderaannemers, vakmensen, projecten en betaalpad.",
     },
     {
       label: "Projecten",
@@ -78,12 +78,12 @@ const sections: Record<Locale, SiteSection[]> = {
     {
       label: "Financiën",
       href: "/finances",
-      summary: "Kosten, factuur, winst en betalingen aan onderaannemers.",
+      summary: "Kosten, winst en betalingen aan onderaannemers.",
     },
     {
       label: "Documenten",
       href: "/documents",
-      summary: "Actuele bestanden, archiefversies en sjablonen.",
+      summary: "Actuele documentregels voor project, onderaannemer en koppeling.",
     },
     {
       label: "Rapporten",

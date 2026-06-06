@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
 import { AppShell } from "@/components/app-shell";
 import { ArchiveStoragePanel } from "@/components/archive-storage-panel";
@@ -93,10 +92,6 @@ const content = {
       { label: "Готово к возврату", value: "4" },
       { label: "Пути поиска", value: "Год / месяц / клиент" },
     ],
-    rulesTitle: "Правила архива в работе",
-    stepsTitle: "Следующие шаги разработки",
-    compare: "Сравнить компоновку архива в примерочной",
-    back: "Назад к проектам",
     filtersTitle: "Поиск по архиву",
     yearLabel: "Год",
     monthLabel: "Месяц",
@@ -131,20 +126,6 @@ const content = {
       "11": "Ноябрь",
       "12": "Декабрь",
     },
-    note:
-      "Архив сохраняет проект как тот же самый проект. Он закрыт, но не потерян, и его можно вернуть вручную, когда работа продолжится.",
-    focusItems: [
-      "Архив остается отдельным от текущей работы.",
-      "Возврат проекта сохраняет ту же историю.",
-      "Архивные проекты остаются доступными для поиска.",
-      "Архив должен ощущаться как закрытое, но читаемое состояние.",
-    ],
-    stepItems: [
-      "Переносить завершенный проект в архив вручную.",
-      "Искать его по году, месяцу, клиенту или направлению.",
-      "Открывать закрытое состояние, если нужна старая история.",
-      "Возвращать проект только тогда, когда работа должна продолжиться.",
-    ],
     archiveSearch: "Архивный поиск",
   },
   nl: {
@@ -156,10 +137,6 @@ const content = {
       { label: "Klaar om terug te halen", value: "4" },
       { label: "Zoekpaden", value: "Jaar / maand / klant" },
     ],
-    rulesTitle: "Archiefregels in gebruik",
-    stepsTitle: "Volgende ontwikkelstappen",
-    compare: "Vergelijk archiefindeling in de proefruimte",
-    back: "Terug naar projecten",
     filtersTitle: "Zoeken in archief",
     yearLabel: "Jaar",
     monthLabel: "Maand",
@@ -194,20 +171,6 @@ const content = {
       "11": "November",
       "12": "December",
     },
-    note:
-      "Het archief bewaart het project als hetzelfde project. Het is gesloten, maar niet verloren, en kan handmatig worden teruggehaald wanneer het werk doorgaat.",
-    focusItems: [
-      "Het archief blijft gescheiden van het huidige werk.",
-      "Het terughalen van een project behoudt dezelfde geschiedenis.",
-      "Gearchiveerde projecten blijven doorzoekbaar.",
-      "Het archief moet voelen als een gesloten maar leesbare toestand.",
-    ],
-    stepItems: [
-      "Verplaats een afgerond project handmatig naar het archief.",
-      "Zoek het op jaar, maand, klant of richting.",
-      "Open de gesloten toestand als de oude geschiedenis nodig is.",
-      "Breng het project alleen terug wanneer het werk moet doorgaan.",
-    ],
     archiveSearch: "Archiefzoekopdracht",
   },
 } as const;
@@ -348,31 +311,6 @@ export default function ArchivePage() {
           </div>
         </section>
 
-        <section className="panel-grid">
-          <article className="panel">
-            <h2>{copy.rulesTitle}</h2>
-            <ul className="check-list">
-              {copy.focusItems.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
-
-          <article className="panel">
-            <h2>{copy.stepsTitle}</h2>
-            <ol className="bullet-list">
-              {copy.stepItems.map((step) => (
-                <li key={step}>{step}</li>
-              ))}
-            </ol>
-            <div className="panel-actions">
-              <Link className="ghost-link" href="/preview">
-                {copy.compare}
-              </Link>
-            </div>
-          </article>
-        </section>
-
         <section className="project-grid">
           {filteredEntries.length > 0 ? (
             filteredEntries.map((entry) => (
@@ -412,16 +350,6 @@ export default function ArchivePage() {
               </div>
             </article>
           )}
-        </section>
-
-        <section className="panel">
-          <h2>{locale === "ru" ? "Связь с архивом" : "Archiefkoppeling"}</h2>
-          <p className="entity-note">{copy.note}</p>
-          <div className="panel-actions">
-            <Link className="ghost-link" href="/projects">
-              {copy.back}
-            </Link>
-          </div>
         </section>
 
         <ArchiveStoragePanel />

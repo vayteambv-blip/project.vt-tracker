@@ -32,7 +32,7 @@
 Подробности:
 - [`06-reports/reports.md`](./06-reports/reports.md)
 
-## 7. Docs / Templates
+## 7. Docs
 
 Подробности:
 - [`07-docs-templates/docs-templates.md`](./07-docs-templates/docs-templates.md)

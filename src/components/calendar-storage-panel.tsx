@@ -2,136 +2,203 @@
 
 import { useState } from "react";
 import { useLocale } from "@/components/locale-provider";
-import { clearStorage, readStorage, writeStorage } from "@/lib/storage";
+import {
+  buildCalendarItemsFromProjects,
+  syncCalendarFromProjects,
+  updateWorkspace,
+  useWorkspaceSelector,
+  type WorkspaceProject,
+} from "@/lib/workspace-store";
 
-type StoredCalendarItem = {
-  name: string;
-  direction: string;
+type StoredCalendarDraft = {
+  projectId: string;
   startDate: string;
-  status: "Today" | "Tomorrow" | "Next week" | "Waiting";
   note: string;
-  updatedAt: string;
-};
-
-const STORAGE_KEY = "vt-tracker:calendar";
-
-const defaultDraft: StoredCalendarItem = {
-  name: "",
-  direction: "",
-  startDate: "",
-  status: "Waiting",
-  note: "",
-  updatedAt: "",
-};
-
-const statusLabel: Record<StoredCalendarItem["status"], Record<"ru" | "nl", string>> = {
-  Today: { ru: "Сегодня", nl: "Vandaag" },
-  Tomorrow: { ru: "Завтра", nl: "Morgen" },
-  "Next week": { ru: "На следующей неделе", nl: "Volgende week" },
-  Waiting: { ru: "В ожидании", nl: "In afwachting" },
 };
 
 const content = {
   ru: {
-    title: "Локальное хранение календаря",
+    title: "Синхронизация календаря",
     note:
-      "Храни календарные черновики в браузере, чтобы проверять стартовые даты и напоминания без backend.",
-    nameLabel: "Название проекта",
-    namePlaceholder: "Например: Ремонт северной крыши",
-    directionLabel: "Направление",
-    directionPlaceholder: "Например: Крыша",
+      "Календарь показывает только проекты со стартом. Здесь можно менять дату старта у проекта, а сама карточка будет обновляться в обе стороны.",
+    projectLabel: "Проект",
+    projectPlaceholder: "Выбери проект",
     startLabel: "Дата старта",
-    startPlaceholder: "Например: 27 May 2026",
-    statusLabel: "Время",
+    startPlaceholder: "Например: 27.05.2026",
     notesLabel: "Заметки",
-    notesPlaceholder: "Запиши состояние календаря или детали напоминания.",
-    save: "Сохранить запись",
-    reset: "Очистить календарь",
-    savedCount: "Сохраненных записей",
-    storage: "Хранилище",
-    storageReady: "Браузерное хранилище готово",
-    lastSave: "Последнее сохранение",
-    notSaved: "Еще не сохранялось",
+    notesPlaceholder: "Короткая заметка для календаря",
+    save: "Сохранить дату",
+    reset: "Сбросить календарь",
+    savedCount: "Показано проектов",
+    storage: "Источник",
+    storageReady: "Дата берется из проекта",
+    lastSave: "Последнее обновление",
+    notSaved: "Еще не сохранено",
+    noProject: "Проект не выбран",
     noDirection: "без направления",
+    noStart: "Не задана",
+    noNote: "Без заметки",
+    emptyState: "Пока нет проектов со стартом. Добавь дату старта в проекте, и он появится здесь.",
+    selectHint: "Можно менять дату здесь, но она всегда сохраняется в самом проекте.",
   },
   nl: {
-    title: "Lokale agendaopslag",
+    title: "Agenda-synchronisatie",
     note:
-      "Bewaar agenda-concepten in de browser om startdata en herinneringen zonder backend te testen.",
-    nameLabel: "Projectnaam",
-    namePlaceholder: "Bijvoorbeeld: Renovatie van het noordelijke dak",
-    directionLabel: "Richting",
-    directionPlaceholder: "Bijvoorbeeld: Dak",
+      "De agenda toont alleen projecten met een startdatum. Hier kun je de startdatum van een project aanpassen en blijft alles in beide richtingen gelijk.",
+    projectLabel: "Project",
+    projectPlaceholder: "Kies een project",
     startLabel: "Startdatum",
-    startPlaceholder: "Bijvoorbeeld: 27 mei 2026",
-    statusLabel: "Tijd",
+    startPlaceholder: "Bijvoorbeeld: 27-05-2026",
     notesLabel: "Notities",
-    notesPlaceholder: "Noteer de agenda-status of herinneringsdetails.",
-    save: "Inschrijving opslaan",
+    notesPlaceholder: "Korte notitie voor de agenda",
+    save: "Datum opslaan",
     reset: "Agenda wissen",
-    savedCount: "Opgeslagen items",
-    storage: "Opslag",
-    storageReady: "Browseropslag is gereed",
-    lastSave: "Laatste opslag",
+    savedCount: "Getoonde projecten",
+    storage: "Bron",
+    storageReady: "Datum komt uit het project",
+    lastSave: "Laatste update",
     notSaved: "Nog niet opgeslagen",
+    noProject: "Project niet gekozen",
     noDirection: "zonder richting",
+    noStart: "Niet ingevuld",
+    noNote: "Geen notitie",
+    emptyState: "Er zijn nog geen projecten met een startdatum. Voeg eerst een startdatum toe aan een project.",
+    selectHint: "Je kunt de datum hier aanpassen, maar de echte waarde blijft in het project staan.",
   },
 } as const;
 
-function readItems(): StoredCalendarItem[] {
-  return readStorage<StoredCalendarItem[]>(STORAGE_KEY, []);
-}
+function createDraft(projects: WorkspaceProject[], fallback?: StoredCalendarDraft): StoredCalendarDraft {
+  if (fallback) {
+    return fallback;
+  }
 
-function saveItems(items: StoredCalendarItem[]): void {
-  writeStorage(STORAGE_KEY, items);
+  const firstVisibleProject = projects.find((project) => project.startDate.trim().length > 0);
+  return {
+    projectId: firstVisibleProject?.id || projects[0]?.id || "",
+    startDate: firstVisibleProject?.startDate || "",
+    note: firstVisibleProject?.note || "",
+  };
 }
 
 export function CalendarStoragePanel() {
   const { locale } = useLocale();
   const copy = content[locale];
-  const [draft, setDraft] = useState<StoredCalendarItem>(defaultDraft);
-  const [items, setItems] = useState<StoredCalendarItem[]>(() => readItems());
+  const projects = useWorkspaceSelector((workspace) => workspace.projects);
+  const items = useWorkspaceSelector((workspace) =>
+    buildCalendarItemsFromProjects(workspace.projects, workspace.calendar),
+  );
+  const [draft, setDraft] = useState<StoredCalendarDraft>(() => createDraft(projects));
 
   const handleSave = () => {
-    const nextItem = { ...draft, updatedAt: new Date().toLocaleString(locale === "ru" ? "ru-RU" : "nl-NL") };
-    const nextItems = [nextItem, ...items];
-    setItems(nextItems);
-    saveItems(nextItems);
-    setDraft(defaultDraft);
+    if (!draft.projectId) {
+      return;
+    }
+
+    const updatedAt = new Date().toLocaleString(locale === "ru" ? "ru-RU" : "nl-NL");
+
+    updateWorkspace((current) => {
+      const nextProjects = current.projects.map((project) =>
+        project.id === draft.projectId
+          ? {
+              ...project,
+              startDate: draft.startDate,
+              note: draft.note,
+              updatedAt,
+            }
+          : project,
+      );
+
+      return syncCalendarFromProjects({
+        ...current,
+        projects: nextProjects,
+      });
+    });
+
+    setDraft(createDraft(projects, { ...draft }));
+  };
+
+  const handleEdit = (project: WorkspaceProject) => {
+    setDraft({
+      projectId: project.id,
+      startDate: project.startDate,
+      note: project.note,
+    });
+  };
+
+  const handleDelete = (id: string) => {
+    const updatedAt = new Date().toLocaleString(locale === "ru" ? "ru-RU" : "nl-NL");
+
+    updateWorkspace((current) => {
+      const nextProjects = current.projects.map((project) =>
+        project.id === id
+          ? {
+              ...project,
+              startDate: "",
+              updatedAt,
+            }
+          : project,
+      );
+
+      return syncCalendarFromProjects({
+        ...current,
+        projects: nextProjects,
+      });
+    });
+
+    if (draft.projectId === id) {
+      setDraft(createDraft(projects));
+    }
   };
 
   const handleReset = () => {
-    clearStorage(STORAGE_KEY);
-    setItems([]);
-    setDraft(defaultDraft);
+    const updatedAt = new Date().toLocaleString(locale === "ru" ? "ru-RU" : "nl-NL");
+
+    updateWorkspace((current) => {
+      const nextProjects = current.projects.map((project) => ({
+        ...project,
+        startDate: "",
+        updatedAt,
+      }));
+
+      return {
+        ...syncCalendarFromProjects({
+          ...current,
+          projects: nextProjects,
+        }),
+        calendar: [],
+      };
+    });
+
+    setDraft(createDraft(projects));
   };
 
   return (
     <section className="panel">
       <h2>{copy.title}</h2>
       <p className="entity-note">{copy.note}</p>
+      <p className="entity-note">{copy.selectHint}</p>
 
       <div className="form-grid">
         <label className="field">
-          <span>{copy.nameLabel}</span>
-          <input
-            value={draft.name}
-            onChange={(event) =>
-              setDraft((current) => ({ ...current, name: event.target.value }))
-            }
-            placeholder={copy.namePlaceholder}
-          />
-        </label>
-
-        <label className="field">
-          <span>{copy.directionLabel}</span>
-          <input
-            value={draft.direction}
-            onChange={(event) =>
-              setDraft((current) => ({ ...current, direction: event.target.value }))
-            }
-            placeholder={copy.directionPlaceholder}
-          />
+          <span>{copy.projectLabel}</span>
+          <select
+            value={draft.projectId}
+            onChange={(event) => {
+              const project = projects.find((item) => item.id === event.target.value);
+              setDraft({
+                projectId: event.target.value,
+                startDate: project?.startDate || "",
+                note: project?.note || "",
+              });
+            }}
+          >
+            <option value="">{copy.projectPlaceholder}</option>
+            {projects.map((project) => (
+              <option key={project.id} value={project.id}>
+                {project.name}
+              </option>
+            ))}
+          </select>
         </label>
 
         <label className="field">
@@ -143,24 +210,6 @@ export function CalendarStoragePanel() {
             }
             placeholder={copy.startPlaceholder}
           />
-        </label>
-
-        <label className="field">
-          <span>{copy.statusLabel}</span>
-          <select
-            value={draft.status}
-            onChange={(event) =>
-              setDraft((current) => ({
-                ...current,
-                status: event.target.value as StoredCalendarItem["status"],
-              }))
-            }
-          >
-            <option value="Today">{statusLabel.Today[locale]}</option>
-            <option value="Tomorrow">{statusLabel.Tomorrow[locale]}</option>
-            <option value="Next week">{statusLabel["Next week"][locale]}</option>
-            <option value="Waiting">{statusLabel.Waiting[locale]}</option>
-          </select>
         </label>
       </div>
 
@@ -178,7 +227,7 @@ export function CalendarStoragePanel() {
 
       <div className="panel-actions">
         <button className="solid-button" type="button" onClick={handleSave}>
-          {copy.save}
+          {draft.projectId ? (locale === "ru" ? "Обновить дату" : "Datum bijwerken") : copy.save}
         </button>
         <button className="ghost-button" type="button" onClick={handleReset}>
           {copy.reset}
@@ -201,16 +250,45 @@ export function CalendarStoragePanel() {
       </div>
 
       <section className="project-grid project-storage-grid">
-        {items.map((item) => (
-          <article className="project-card" key={`${item.name}-${item.updatedAt}`}>
-            <div className="project-topline">
-              <span className="status status-current">{statusLabel[item.status][locale]}</span>
-              <span className="direction">{item.direction || copy.noDirection}</span>
-            </div>
-            <h3>{item.name}</h3>
-            <p className="project-note">{item.note}</p>
+        {items.length === 0 ? (
+          <article className="project-card">
+            <h3>{copy.emptyState}</h3>
           </article>
-        ))}
+        ) : (
+          items.map((item) => (
+            <article className="project-card" key={item.id}>
+              <div className="project-topline">
+                <span className="status status-current">{item.status}</span>
+                <span className="direction">{item.direction || copy.noDirection}</span>
+              </div>
+              <h3>{item.name}</h3>
+              <p className="project-note">{item.note || copy.noNote}</p>
+              <dl className="project-meta">
+                <div>
+                  <dt>{copy.startLabel}</dt>
+                  <dd>{item.startDate || copy.noStart}</dd>
+                </div>
+              </dl>
+              <div className="panel-actions">
+                <button
+                  className="ghost-button"
+                  type="button"
+                  onClick={() => {
+                    const project = projects.find((entry) => entry.id === item.id);
+                    if (project) {
+                      handleEdit(project);
+                    }
+                  }}
+                >
+                  {locale === "ru" ? "Редактировать" : "Bewerken"}
+                </button>
+                <button className="ghost-button" type="button" onClick={() => handleDelete(item.id)}>
+                  {locale === "ru" ? "Убрать дату" : "Datum verwijderen"}
+                </button>
+              </div>
+            </article>
+          ))
+        )}
       </section>
     </section>
   );

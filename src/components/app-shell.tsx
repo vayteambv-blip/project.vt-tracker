@@ -22,9 +22,6 @@ export function AppShell({ title, description, children }: AppShellProps) {
           <div className="brand-mark">VT</div>
           <div>
             <div className="brand-name">VT Tracker</div>
-            <div className="brand-subtitle">
-              {locale === "ru" ? "Локальный фронтенд на Next.js + TypeScript" : "Lokale frontend op Next.js + TypeScript"}
-            </div>
           </div>
         </div>
 

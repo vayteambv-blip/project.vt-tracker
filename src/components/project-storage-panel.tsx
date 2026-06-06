@@ -2,26 +2,33 @@
 
 import { useState } from "react";
 import { useLocale } from "@/components/locale-provider";
-import { clearStorage, readStorage, writeStorage } from "@/lib/storage";
+import {
+  createWorkspaceId,
+  syncCalendarFromProjects,
+  updateWorkspace,
+  useWorkspaceSelector,
+} from "@/lib/workspace-store";
 
 type StoredProject = {
+  id?: string;
   title: string;
   client: string;
   direction: string;
   startDate: string;
   status: "Draft" | "Ready" | "Active" | "Archive";
+  subcontractors: string;
   note: string;
   updatedAt: string;
 };
 
-const STORAGE_KEY = "vt-tracker:projects";
-
 const defaultDraft: StoredProject = {
+  id: undefined,
   title: "",
   client: "",
   direction: "",
   startDate: "",
   status: "Draft",
+  subcontractors: "",
   note: "",
   updatedAt: "",
 };
@@ -92,35 +99,74 @@ const content = {
   },
 } as const;
 
-function readProjects(): StoredProject[] {
-  return readStorage<StoredProject[]>(STORAGE_KEY, []);
-}
-
-function saveProjects(projects: StoredProject[]): void {
-  writeStorage(STORAGE_KEY, projects);
-}
-
 export function ProjectStoragePanel() {
   const { locale } = useLocale();
   const copy = content[locale];
   const [draft, setDraft] = useState<StoredProject>(defaultDraft);
-  const [projects, setProjects] = useState<StoredProject[]>(() => readProjects());
+  const projects = useWorkspaceSelector((workspace) => workspace.projects);
 
   const handleSave = () => {
     const nextProject = {
       ...draft,
+      id: draft.id || createWorkspaceId("project"),
+      name: draft.title,
+      client: draft.client,
+      direction: draft.direction,
+      startDate: draft.startDate,
+      status: draft.status,
+      subcontractors: draft.subcontractors
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean),
+      note: draft.note,
       updatedAt: new Date().toLocaleString(locale === "ru" ? "ru-RU" : "nl-NL"),
     };
 
-    const nextProjects = [nextProject, ...projects];
-    setProjects(nextProjects);
-    saveProjects(nextProjects);
+    updateWorkspace((current) => {
+      const withoutCurrent = current.projects.filter((project) => project.id !== nextProject.id);
+      const nextProjects = [nextProject, ...withoutCurrent];
+      return syncCalendarFromProjects({
+        ...current,
+        projects: nextProjects,
+      });
+    });
     setDraft(defaultDraft);
   };
 
+  const handleEdit = (project: (typeof projects)[number]) => {
+    setDraft({
+      id: project.id,
+      title: project.name,
+      client: project.client,
+      direction: project.direction,
+      startDate: project.startDate,
+      status: project.status,
+      subcontractors: project.subcontractors.join(", "),
+      note: project.note,
+      updatedAt: project.updatedAt,
+    });
+  };
+
+  const handleDelete = (id: string) => {
+    updateWorkspace((current) => {
+      const nextProjects = current.projects.filter((project) => project.id !== id);
+      return syncCalendarFromProjects({
+        ...current,
+        projects: nextProjects,
+      });
+    });
+    if (draft.id === id) {
+      setDraft(defaultDraft);
+    }
+  };
+
   const handleReset = () => {
-    clearStorage(STORAGE_KEY);
-    setProjects([]);
+    updateWorkspace((current) =>
+      syncCalendarFromProjects({
+        ...current,
+        projects: [],
+      }),
+    );
     setDraft(defaultDraft);
   };
 
@@ -191,6 +237,17 @@ export function ProjectStoragePanel() {
             <option value="Archive">{statusLabel.Archive[locale]}</option>
           </select>
         </label>
+
+        <label className="field">
+          <span>{locale === "ru" ? "Субподрядчики" : "Onderaannemers"}</span>
+          <input
+            value={draft.subcontractors}
+            onChange={(event) =>
+              setDraft((current) => ({ ...current, subcontractors: event.target.value }))
+            }
+            placeholder={locale === "ru" ? "Например: Кровля Плюс, Электро" : "Bijvoorbeeld: DakPlus, Elektro"}
+          />
+        </label>
       </div>
 
       <label className="field">
@@ -207,7 +264,7 @@ export function ProjectStoragePanel() {
 
       <div className="panel-actions">
         <button className="solid-button" type="button" onClick={handleSave}>
-          {copy.save}
+          {draft.id ? (locale === "ru" ? "Обновить проект" : "Project bijwerken") : copy.save}
         </button>
         <button className="ghost-button" type="button" onClick={handleReset}>
           {copy.reset}
@@ -231,12 +288,12 @@ export function ProjectStoragePanel() {
 
       <section className="project-grid project-storage-grid">
         {projects.map((project) => (
-          <article className="project-card" key={`${project.title}-${project.updatedAt}`}>
+          <article className="project-card" key={project.id}>
             <div className="project-topline">
               <span className="status status-current">{statusLabel[project.status][locale]}</span>
               <span className="direction">{project.direction || copy.project}</span>
             </div>
-            <h3>{project.title || copy.noTitle}</h3>
+            <h3>{project.name || copy.noTitle}</h3>
             <p className="project-note">{project.note || copy.noNotes}</p>
             <dl className="project-meta">
               <div>
@@ -247,7 +304,19 @@ export function ProjectStoragePanel() {
                 <dt>{copy.startLabel}</dt>
                 <dd>{project.startDate || copy.noDate}</dd>
               </div>
+              <div>
+                <dt>{locale === "ru" ? "Субподрядчики" : "Onderaannemers"}</dt>
+                <dd>{project.subcontractors.join(", ") || "—"}</dd>
+              </div>
             </dl>
+            <div className="panel-actions">
+              <button className="ghost-button" type="button" onClick={() => handleEdit(project)}>
+                {locale === "ru" ? "Редактировать" : "Bewerken"}
+              </button>
+              <button className="ghost-button" type="button" onClick={() => handleDelete(project.id)}>
+                {locale === "ru" ? "Удалить" : "Verwijderen"}
+              </button>
+            </div>
           </article>
         ))}
       </section>
